@@ -8,7 +8,7 @@ function photographerFactory(data) {
         article.setAttribute('id', id);
         
         article.innerHTML = `
-                    <a href="photographer.html?id=${id}">
+                    <a href="photographer.html?id=${id}" aria-label="lien vers la page du photographe : ${name}">
                         <img src="assets/photographers/${portrait}" alt="${name}">
                         <h2>${name}</h2>
                     </a>
@@ -52,7 +52,7 @@ function MediaFactory(data) {
     let mediaSupport;
 
     if(data.video !== undefined) {
-        mediaSupport = `<video controls src="${videoSrc}" type="video/mp4"></video>`
+        mediaSupport = `<video controls src="${videoSrc}" type="video/mp4" aria-label="video ${title}"></video>`
     }else if(data.image !== undefined){
         mediaSupport = `<img src="${picture}" alt="${title}">`;
     }
