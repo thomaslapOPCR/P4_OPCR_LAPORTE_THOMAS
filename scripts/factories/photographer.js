@@ -47,44 +47,8 @@ function MediaFactory(data) {
     let name = "";
     const {date, id, photographerId, image,video, likes, title, price} = data;
 
-    switch (photographerId) {
-        case 243:{
-            name = "Mimi";
-            break;
-        }
-
-        case 930:{
-            name = "Ellie-Rose";
-            break;
-        }
-
-        case 82:{
-            name = "Tracy";
-            break;
-        }
-
-        case 527:{
-            name = "Nabeel";
-            break;
-        }
-
-        case 925:{
-            name = "Rhode";
-            break;
-        }
-
-        case 195:{
-            name = "Marcel";
-            break;
-        }
-        default:{
-            break;
-        }
-    }
-
-
-    const picture = `assets/photos/${name}/${image}`;
-    const videoSrc = `assets/photos/${name}/${video}`;
+    const picture = `assets/photos/${photographerId}/${image}`;
+    const videoSrc = `assets/photos/${photographerId}/${video}`;
     let mediaSupport;
 
     if(data.video !== undefined) {
