@@ -8,7 +8,7 @@ function photographerFactory(data) {
         article.setAttribute('id', id);
         
         article.innerHTML = `
-                    <a href="../../photographer.html?id=${id}">
+                    <a href="photographer.html?id=${id}">
                         <img src="assets/photographers/${portrait}" alt="${name}">
                         <h2>${name}</h2>
                     </a>
@@ -21,7 +21,8 @@ function photographerFactory(data) {
     return  {getUserCardDOM }
 }
 
- function photographerMediaFactory(data) {
+
+function photographerMediaFactory(data) {
     const { name, portrait, id,city,country,tagline,price } = data;
     const picture = `assets/photographers/${portrait}`;
 
@@ -85,6 +86,7 @@ function MediaFactory(data) {
     const picture = `assets/photos/${name}/${image}`;
     const videoSrc = `assets/photos/${name}/${video}`;
     let mediaSupport;
+
     if(data.video !== undefined) {
         mediaSupport = `<video controls src="${videoSrc}" type="video/mp4"></video>`
     }else if(data.image !== undefined){
@@ -92,8 +94,12 @@ function MediaFactory(data) {
     }
 
     function getMediaCardDOM() {
-        const Media = `
-            <article class="Media-card" data-MediaId="${id}" data-date="${date}">
+        const Media = document.createElement('article');
+        Media.setAttribute('id', id);
+        Media.setAttribute('data-date', date);
+        Media.setAttribute('class', "Media-card");
+
+        Media.innerHTML = `
                 <div class="media">
                     ${mediaSupport}
                 </div>
@@ -101,8 +107,7 @@ function MediaFactory(data) {
                     <h3 class="media-title">${title}</h3>
                     <p class="media-likes">${likes}<i class="fas fa-heart"></i></p>
                 </div>
-            </article> `
-
+           `
         return (Media);
     }
 
