@@ -33,8 +33,12 @@ function selectFilter() {
 }
 
 async function fetchData() {
-    let res = await fetch("../../data/photographers.json")
-    return await res.json();
+    try {
+        let res = await fetch("../../data/photographers.json");
+        return await res.json();
+    } catch (e) {
+        return console.error(e);
+    }
 }
 
 function getId(){
@@ -46,46 +50,19 @@ function getId(){
 }
 
 async function getMedia() {
-    let mediaData = await fetchData().then(async (e)=> e.media);
 
-    const mediaFilter = mediaData.filter(function (el) {
-        return el.photographerId.toString() === getId();
-    });
+    let mediaData = await fetchData()
 
-    const media =
-        [{
-            "photographerId" : mediaFilter.photographerId,
-            "id": mediaFilter.id,
-            "date" : mediaFilter.date,
-            "image" : mediaFilter.image,
-            "video" : mediaFilter.video,
-            "likes" : mediaFilter.likes,
-            "price" : mediaFilter.price,
-            "title" : mediaFilter.title,
-        }]
-
-
-    return ({media: [...mediaFilter]})
+    return mediaData.media.filter(function (el) {
+        let id =  el.photographerId;
+         return id.toString() === getId();
+     });
 }
 
+
+
 async function getPhotographers() {
-    let data = await fetchData().then(async (e)=> e.photographers, getId());
-
-    const PhotographersData = data.filter(function (el) {
-        return el.id.toString() === getId();
-    });
-
-    const photographers=
-        [ {
-            "name":  PhotographersData.name,
-            "id":  PhotographersData.id,
-            "city": PhotographersData.city,
-            "country": PhotographersData.country,
-            "tagline": PhotographersData.tagline,
-            "price": PhotographersData.price,
-            "portrait":  PhotographersData.portrait,
-        }]
-    return ({photographers: [...PhotographersData]})
+    return await fetchData();
 }
 
 
@@ -93,24 +70,23 @@ async function displayData(photographers, media) {
     const photographersSection = document.querySelector(".photograph-header");
     const mediaSection = document.querySelector("#Media-Content");
     const mediaSectionCard = document.querySelector(".Media-card");
-    // const result = (mediaSection.childElementCount % 2  == 0) ? "even" : "odd";
+
+
     photographers.forEach((photographer) => {
         const photographerModel = photographerMediaFactory(photographer);
-        const userCardDOM = photographerModel.getUserCardDOM();
-        photographersSection.innerHTML += userCardDOM;
+        photographersSection.innerHTML = photographerModel.getUserCardDOM();
     });
 
     media.forEach((media) => {
         const mediaModel = MediaFactory(media);
-        const userCardDOM = mediaModel.getMediaCardDOM();
-        mediaSection.innerHTML += userCardDOM;
+        mediaSection.appendChild(mediaModel.getMediaCardDOM());
     });
 };
 
 async function init() {
     const { photographers } = await getPhotographers();
-    const { media } = await getMedia();
-    displayData(photographers,media);
+
+    displayData(photographers,await getMedia());
 };
 
 init();

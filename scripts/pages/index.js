@@ -1,7 +1,11 @@
     
     async function fetchData() {
-        let res = await fetch("../../data/photographers.json")
-        return await res.json();
+        try {
+            let res = await fetch("../../data/photographers.json");
+            return await res.json();
+        } catch (e) {
+            return console.error(e);
+        }
     }
 
     async function getPhotographers() {
