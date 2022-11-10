@@ -59,18 +59,17 @@ async function getMedia() {
      });
 }
 
-
-
 async function getPhotographers() {
-    return await fetchData();
+    const data = await fetchData();
+    return data.photographers.filter(function (el) {
+        return el.id.toString() === getId();
+    });
 }
-
 
 async function displayData(photographers, media) {
     const photographersSection = document.querySelector(".photograph-header");
     const mediaSection = document.querySelector("#Media-Content");
     const mediaSectionCard = document.querySelector(".Media-card");
-
 
     photographers.forEach((photographer) => {
         const photographerModel = photographerMediaFactory(photographer);
@@ -81,12 +80,10 @@ async function displayData(photographers, media) {
         const mediaModel = MediaFactory(media);
         mediaSection.appendChild(mediaModel.getMediaCardDOM());
     });
-};
+}
 
 async function init() {
-    const { photographers } = await getPhotographers();
-
-    displayData(photographers,await getMedia());
-};
+    displayData(await getPhotographers(),await getMedia());
+}
 
 init();
