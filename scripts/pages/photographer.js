@@ -83,7 +83,7 @@ async function displayData(photographers, media) {
 }
 
 async function init() {
-    displayData(await getPhotographers(),await getMedia());
+    await displayData(await getPhotographers(), await getMedia());
 }
 
 init();
