@@ -86,4 +86,19 @@ async function init() {
     await displayData(await getPhotographers(), await getMedia());
 }
 
+async function fillSubBar() {
+    const domLikes = document.querySelector("#numberLikes");
+    const domPhotographerPrice = document.querySelector('#price');
+    const photographersPrice = await getPhotographers();
+    const numberOfLikes = await getMedia();
+    let totalLikes = 0;
+    
+    
+    for(let data of numberOfLikes) totalLikes += data.likes;
+    domLikes.textContent = totalLikes;
+    domPhotographerPrice.textContent = photographersPrice[0].price + "€ / jour";
+    
+}
+
 init();
+fillSubBar();
