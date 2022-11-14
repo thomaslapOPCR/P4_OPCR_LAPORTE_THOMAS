@@ -96,7 +96,7 @@ async function fillSubBar() {
 
 
     for(let data of numberOfLikes) totalLikes += data.likes;
-    domLikes.textContent = totalLikes;
+    domLikes.textContent = totalLikes.toLocaleString();
     domPhotographerPrice.textContent = photographersPrice[0].price + "€ / jour";
 
 //    travail sur le code plus reprise de cours sur Java scrip pour palier a certaine lacune
