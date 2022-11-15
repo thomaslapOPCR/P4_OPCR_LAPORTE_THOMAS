@@ -103,7 +103,9 @@ async function fillSubBar() {
       const likesElements = i.children[1].lastElementChild;
       likesElements.addEventListener('click',(e)=>{
           let target = e.target;
-
+          let likes = parseInt(target.innerText);
+          likes= parseInt(likes +1);
+          target.firstChild.textContent = likes;
 
       })
     }
