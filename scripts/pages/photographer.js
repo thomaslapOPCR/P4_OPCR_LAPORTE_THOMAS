@@ -94,19 +94,20 @@ async function fillSubBar() {
     const numberOfLikes = await getMedia();
     let totalLikes = 0;
     let id = '';
-
+    let isLiked = false;
     for(let data of numberOfLikes) totalLikes += data.likes;
     domLikes.textContent = totalLikes.toLocaleString();
     domPhotographerPrice.textContent = photographersPrice[0].price + "€ / jour";
 
     for(let i of test[0].children) {
       const likesElements = i.children[1].lastElementChild;
-      likesElements.addEventListener('click',(e)=>{
+      likesElements.addEventListener('click',
+          (e)=>{
+          isLiked = true;
           let target = e.target;
           let likes = parseInt(target.innerText);
-          likes= parseInt(likes +1);
+          isLiked  ? likes= parseInt(likes +1) : likes= parseInt(likes -1);
           target.firstChild.textContent = likes;
-
       })
     }
 
