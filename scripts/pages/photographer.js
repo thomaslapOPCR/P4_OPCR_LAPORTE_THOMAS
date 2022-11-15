@@ -109,9 +109,9 @@ async function fillSubBar() {
       })
 
       likesElements.addEventListener('click',
-          (e)=>{
-          let target = e.target;
-          let likes = parseInt(target.innerText);
+          ()=>{
+              console.log(likesElements)
+          let likes = parseInt(likesElements.textContent);
           // isLiked  ? likes= parseInt(likes-1) : likes= parseInt(likes+1);
           if(isLiked=== false){
               likes= parseInt(likes+1)
@@ -122,9 +122,7 @@ async function fillSubBar() {
               isLiked = false;
               domLikes.textContent =parseInt(  totalLikes = totalLikes-1).toLocaleString();
           }
-          if(target.firstChild === null) return;
-          target.firstChild.textContent = likes;
-
+              likesElements.innerHTML = likes +`<i class="fas fa-heart">`;
       })
     }
 }
