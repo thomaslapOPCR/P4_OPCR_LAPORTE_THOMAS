@@ -89,29 +89,40 @@ async function init() {
 async function fillSubBar() {
     const domLikes = document.querySelector("#numberLikes");
     const domPhotographerPrice = document.querySelector('#price');
-    const test = document.querySelectorAll('#Media-Content');
+    const mediaContent = document.querySelectorAll('#Media-Content');
     const photographersPrice = await getPhotographers();
     const numberOfLikes = await getMedia();
+
     let totalLikes = 0;
-    let id = '';
-    let isLiked = false;
+
     for(let data of numberOfLikes) totalLikes += data.likes;
     domLikes.textContent = totalLikes.toLocaleString();
     domPhotographerPrice.textContent = photographersPrice[0].price + "€ / jour";
 
-    for(let i of test[0].children) {
+    for(let i of mediaContent[0].children) {
       const likesElements = i.children[1].lastElementChild;
+      let isLiked = false;
       likesElements.addEventListener('click',
           (e)=>{
-          isLiked = true;
           let target = e.target;
           let likes = parseInt(target.innerText);
-          isLiked  ? likes= parseInt(likes +1) : likes= parseInt(likes -1);
+          // isLiked  ? likes= parseInt(likes-1) : likes= parseInt(likes+1);
+          if(isLiked=== false){
+              likes= parseInt(likes+1)
+              isLiked = true;
+              domLikes.textContent =parseInt(  totalLikes = totalLikes+1).toLocaleString();
+          } else if(isLiked===true) {
+              likes= parseInt(likes-1)
+              isLiked = false;
+              domLikes.textContent =parseInt(  totalLikes = totalLikes-1).toLocaleString();
+          }
+
           target.firstChild.textContent = likes;
+
       })
+        console.log(totalLikes)
+
     }
-
-
 }
 
 init();
