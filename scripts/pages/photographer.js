@@ -1,4 +1,4 @@
-selectFilter();
+
 function openSelectMenu() {
     const cursor = document.querySelector('#cursor');
     const selector = document.querySelector('#selectlist');
@@ -102,6 +102,12 @@ async function fillSubBar() {
     for(let i of mediaContent[0].children) {
       const likesElements = i.children[1].lastElementChild;
       let isLiked = false;
+
+      i.addEventListener('click',(e)=>{
+          if(e.target.className === "media-likes") return;
+          openLightBox();
+      })
+
       likesElements.addEventListener('click',
           (e)=>{
           let target = e.target;
@@ -116,14 +122,17 @@ async function fillSubBar() {
               isLiked = false;
               domLikes.textContent =parseInt(  totalLikes = totalLikes-1).toLocaleString();
           }
-
+          if(target.firstChild === null) return;
           target.firstChild.textContent = likes;
 
       })
-        console.log(totalLikes)
-
     }
+}
+function openLightBox(){
+    console.log('LightBox')
+
 }
 
 init();
 fillSubBar();
+selectFilter();
