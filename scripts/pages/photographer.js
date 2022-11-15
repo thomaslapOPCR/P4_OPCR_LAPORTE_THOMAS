@@ -126,8 +126,12 @@ async function fillSubBar() {
       })
     }
 }
+
+
+//lightBox
 function openLightBox(){
-    console.log('LightBox')
+
+
 
 }
 
