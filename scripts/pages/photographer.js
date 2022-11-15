@@ -130,9 +130,6 @@ async function fillSubBar() {
 
 //lightBox
 function openLightBox(){
-
-
-
 }
 
 init();
