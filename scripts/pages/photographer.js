@@ -89,18 +89,26 @@ async function init() {
 async function fillSubBar() {
     const domLikes = document.querySelector("#numberLikes");
     const domPhotographerPrice = document.querySelector('#price');
-    const mediaGlobal = document.querySelectorAll('.media-likes');
+    const test = document.querySelectorAll('#Media-Content');
     const photographersPrice = await getPhotographers();
     const numberOfLikes = await getMedia();
     let totalLikes = 0;
-
+    let id = '';
 
     for(let data of numberOfLikes) totalLikes += data.likes;
     domLikes.textContent = totalLikes.toLocaleString();
     domPhotographerPrice.textContent = photographersPrice[0].price + "€ / jour";
 
-//    travail sur le code plus reprise de cours sur Java scrip pour palier a certaine lacune
-    
+    for(let i of test[0].children) {
+      const likesElements = i.children[1].lastElementChild;
+      likesElements.addEventListener('click',(e)=>{
+          let target = e.target;
+
+
+      })
+    }
+
+
 }
 
 init();

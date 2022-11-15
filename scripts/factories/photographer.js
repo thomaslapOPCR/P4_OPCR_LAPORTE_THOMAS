@@ -69,7 +69,7 @@ function MediaFactory(data) {
                 </div>
                 <div class="titleAndLikes">
                     <h3 class="media-title">${title}</h3>
-                    <p onclick="" class="media-likes">${likes}<i class="fas fa-heart"></i></p>
+                    <p class="media-likes">${likes}<i class="fas fa-heart"></i></p>
                 </div>
            `
         return (Media);
