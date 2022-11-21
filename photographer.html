@@ -12,7 +12,7 @@
   </head>
   <body>
     <header>
-	    <a href="index.html" aria-label="lien vers la page d'accueil"><img src="assets/images/logo.png" class="logo" alt="logo"/></a>
+	    <a href="index.html" aria-label="lien vers la page d'accueil"><img src="assets/images/logo.png" class="logo" alt="Fisheye Home page"/></a>
     </header>
     <main id="main">
       <section class="photograph-header"></section>
@@ -38,28 +38,47 @@
 		  </article>
 	  </section>
 <!-- 	    lightBox -->
-	    <section id="lightBox" aria-label="image closeup view"><!--  pos r -->
-		    <div class="close">X</div>     <!--  pos a t0 r0 -->
-		    <div class="image-box">
-			    <i></i>
-			    <img src="" alt="">
-			    <i></i>
-		    </div>
-	    </section>
-	    
+<!-- 	    <section id="lightBox" aria-label="image closeup view">&lt;!&ndash;  pos r &ndash;&gt; -->
+<!-- 		    <div class="close">X</div>     &lt;!&ndash;  pos a t0 r0 &ndash;&gt; -->
+<!-- 		    <div class="image-box"> -->
+<!-- 			    <i></i> -->
+<!-- 			    <img src="" alt=""> -->
+<!-- 			    <i></i> -->
+<!-- 		    </div> -->
+<!-- 	    </section> -->
+<!-- 	     -->
     </main>
     <div id="contact_modal">
 			<div class="modal">
-				<div>
-		          <h2>Contactez-moi</h2>
+				<div class="header">
+					<div class="text-header">
+						<h2>Contactez-moi</h2>
+						<h2 id="Photographer-name"></h2>
+					</div>
 		          <img src="assets/icons/close.svg" onclick="closeModal()" />
                 </div>
+				
 				<form>
 					<div>
-						<label>Prénom</label>
-						<input />
+						<label for="firstname">Prénom</label>
+						<input class="text-control" type="text" id="firstname"/>
 					</div>
-					<button class="contact_button">Envoyer</button>
+					
+					<div>
+						<label for="lastname">Nom</label>
+						<input  class="text-control"  type="text" id="lastname"/>
+					</div>
+					
+					<div>
+						<label for="email">Email</label>
+						<input  class="text-control"  type="text" id="email"/>
+					</div>
+					
+					<div>
+						<label for="message">Votre message</label>
+						<textarea  class="text-control"  id="message"></textarea>
+					</div>
+					<button class="contact_button" id="submit">Envoyer</button>
 				</form>
 			</div>
 	</div>

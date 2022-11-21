@@ -241,6 +241,14 @@ main  {
 .contact_button:hover {
     background: #DB8876;
 }
+#contact_modal{
+    position: fixed;
+    top: 10px;
+    bottom: 20px;
+    width: 100%;
+    height: 100%;
+    overflow-x: scroll;
+}
 
 .modal {
     border-radius: 5px;
@@ -254,21 +262,31 @@ main  {
     margin: auto;
 }
 
-.modal header {
+.modal .header {
+    display: flex;
     justify-content: space-between;
+    align-items: flex-start;
     width: 100%;
 }
 
-.modal header img {
+.modal .header img {
+    display: flex;
+    width: 30px;
     cursor: pointer;
 }
 
-.modal header h2 {
+.modal .header .text-header h2 {
     font-size: 64px;
     font-weight: normal;
     text-align: center;
 }
+.modal .header .text-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
 
+}
 form {
     display: flex;
     width: 100%;
@@ -288,12 +306,47 @@ form div {
     align-items: self-start;
     margin-bottom: 26px;
 }
+#message {
+    height: 130px;
+    resize: none;
+}
 
-form input {
+#name {
+    display: flex;
+    justify-content: flex-start;
+}
+form div[data-valid-visible="true"]::after {
+    opacity: 1;
+}
+form div[data-valid-visible="true"] .text-control {
+    border: 2px solid #0b8613;
+}
+.formData[data-error]::after {
+    content: attr(data-error);
+    font-size: 0.4em;
+    color: #e54858;
+    display: block;
+    margin-top: 7px;
+    margin-bottom: 7px;
+    text-align: left;
+    line-height: 0.3;
+    opacity: 0;
+    transition: 0.3s;
+}
+.formData[data-error-visible="true"]::after {
+    opacity: 1;
+}
+.formData[data-error-visible="true"] .text-control {
+    border: 2px solid #e54858;
+}
+
+
+form input, form textarea {
     width: 100%;
     height: 68px;
     border: none;
     border-radius: 5px;
+    padding: 10px;
 }
 
 #subMenu {
