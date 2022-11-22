@@ -43,7 +43,12 @@ async function fetchData() {
 function getId() {
   const link = new URL(window.location.href);
   const searchParams = new URLSearchParams(link.search);
-  if (!searchParams.has('id')) return console.error('Aucun parametre ID');
+  let IdList = ["82","195","243","527","925","930"].includes(searchParams.get('id'))
+
+  if (!searchParams.has('id') || !IdList) {
+    console.error('Aucun parametre ID');
+    return location.href = "index.html"
+  }
 
   return searchParams.get('id');
 }
@@ -88,7 +93,6 @@ async function fillSubBar() {
   const mediaContent = document.querySelectorAll('#Media-Content');
   const photographersPrice = await getPhotographers();
   const numberOfLikes = await getMedia();
-
   let totalLikes = 0;
 
   for (const data of numberOfLikes) totalLikes += data.likes;
@@ -114,12 +118,14 @@ async function fillSubBar() {
           likes = parseInt(likes + 1);
           isLiked = true;
           domLikes.textContent = parseInt(totalLikes += 1).toLocaleString();
+          likesElements.innerHTML = `${likes}<i class="fas fa-heart">`;
         } else if (isLiked === true) {
           likes = parseInt(likes - 1);
           isLiked = false;
           domLikes.textContent = parseInt(totalLikes -= 1).toLocaleString();
+          likesElements.innerHTML = `${likes}<i class="fal fa-heart">`;
         }
-        likesElements.innerHTML = `${likes}<i class="fas fa-heart">`;
+
       },
     );
   }

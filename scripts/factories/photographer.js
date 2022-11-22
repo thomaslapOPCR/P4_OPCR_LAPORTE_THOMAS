@@ -1,5 +1,6 @@
 // eslint-disable-next-line
 function photographerFactory(data) {
+  // eslint-disable-next-line-no-unused-vars
   const {
     name, portrait, id, city, country, tagline, price,
   } = data;
@@ -74,7 +75,7 @@ function MediaFactory(data) {
                 </div>
                 <div class="titleAndLikes">
                     <h3 class="media-title">${title}</h3>
-                    <p class="media-likes" aria-label="likes">${likes}<i class="fas fa-heart"></i></p>
+                    <p class="media-likes" aria-label="likes">${likes}<i class="fal fa-heart"></i></i></p>
                 </div>
            `;
     return (Media);
