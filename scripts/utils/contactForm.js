@@ -2,7 +2,6 @@ async function fillName(){
   const test = await window.getPhotographers();
   test.forEach((el)=>{
     const photographerName = document.querySelector('#Photographer-name');
-
     photographerName.innerHTML = el.name;
   })
 }
@@ -27,8 +26,8 @@ const form = document.querySelector("#submit");
 
 
   form.onsubmit = function (e){
-    e.preventDefault();
-  //
+
+
   }
 
 }
@@ -52,6 +51,7 @@ function InputValidate(elements, regex ,message) {
     asginErrorOrValidity(elements.parentElement,false,message, true,false);
     return false;
   }
+  if(regex === null) return;
   // realise le test est assigne un message d'erreur ou de validation
   if (checkValidValue) {
     asginErrorOrValidity(elements.parentElement,true,"", false,true);
