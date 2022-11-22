@@ -38,7 +38,7 @@ function photographerMediaFactory(data) {
              <h2>${city} , ${country}</h2>
              <p> ${tagline}</p>
         </section>
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+        <button class="contact_button" onclick="displayModal()" aria-label="Contact Me ${name}">Contactez-moi</button>
         <section class="image">
             <img src="../../assets/photographers/${portrait}" alt="${name}">
         </section> `;
@@ -76,7 +76,7 @@ function MediaFactory(data) {
                 </a>
                 <div class="titleAndLikes">
                     <h3 class="media-title">${title}</h3>
-                    <p class="media-likes" aria-label="likes">${likes}<i class="fal fa-heart"></i></i></p>
+                    <p class="media-likes" aria-label="likes" tabindex="0" role="button" aria-pressed="false">${likes}<i class="fal fa-heart"></i></i></p>
                 </div>
            `;
     return (Media);
@@ -84,5 +84,3 @@ function MediaFactory(data) {
 
   return { getMediaCardDOM };
 }
-
-//
