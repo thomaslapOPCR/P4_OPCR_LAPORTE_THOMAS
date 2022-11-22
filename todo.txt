@@ -3,7 +3,7 @@
     o	bouton "Contactez-moi" ajouter un aria-label | ✅
     o	card | ⚠
 
-	la mediaFactory ne doit pas être dans le code source de la photographerFactory
+	la mediaFactory ne doit pas être dans le code source de la photographerFactory  | ✅
 
 	ajouter le aria-label pour chaque média | ✅
 
@@ -11,7 +11,6 @@
 
 	pour le cœur ajouter le rôle bouton  | ✅
     o	mettre en place la tabulation sur toute la page | ✅
-
 
 •	Formulaire
     o	Derrière la modal, la page photographe doit être grisé | ✅
