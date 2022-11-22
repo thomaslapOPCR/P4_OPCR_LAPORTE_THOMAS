@@ -68,11 +68,12 @@ function MediaFactory(data) {
     Media.setAttribute('id', id);
     Media.setAttribute('data-date', date);
     Media.setAttribute('class', 'Media-card');
+    Media.setAttribute('aria-label', title);
 
     Media.innerHTML = `
-                <div class="media">
+                <a class="media" href="#" aria-label="${title}, closeup view">
                     ${mediaSupport}
-                </div>
+                </a>
                 <div class="titleAndLikes">
                     <h3 class="media-title">${title}</h3>
                     <p class="media-likes" aria-label="likes">${likes}<i class="fal fa-heart"></i></i></p>
