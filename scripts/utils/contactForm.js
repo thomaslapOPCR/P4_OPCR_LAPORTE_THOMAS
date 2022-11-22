@@ -15,7 +15,18 @@ function displayModal() {
 // eslint-disable-next-line
 function closeModal() {
   const modal = document.getElementById('contact_modal');
-  modal.style.display = 'none';
+  const exit = document.querySelector('#exit-modal');
+
+  exit.onclick = function () {
+    modal.style.display = 'none';
+  }
+  document.onkeydown = function (event) {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      modal.style.display = 'none';
+    }
+  }
+
 }
 
 function submit() {
@@ -57,3 +68,4 @@ function InputValidate(elements, regex, message) {
 }
 
 submit();
+closeModal();

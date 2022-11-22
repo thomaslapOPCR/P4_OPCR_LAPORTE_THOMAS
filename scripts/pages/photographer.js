@@ -130,7 +130,13 @@ async function fillSubBar() {
     );
   }
 }
+
+function accessibility() {
+
+}
 // lightBox
+
+
 
 init();
 fillSubBar();

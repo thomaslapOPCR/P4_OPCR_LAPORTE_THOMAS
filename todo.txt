@@ -1,0 +1,38 @@
+•	Page détail
+    o	l'id n'existe pas ou n'existe pas redirection vers la page d'accueil | ✅
+    o	bouton "Contactez-moi" ajouter un aria-label | ✅
+    o	card | ⚠
+
+	la mediaFactory ne doit pas être dans le code source de la photographerFactory
+
+	ajouter le aria-label pour chaque média | ✅
+
+	chaque média doit être dans un lien | ✅
+
+	pour le cœur ajouter le rôle bouton  | ✅
+    o	mettre en place la tabulation sur toute la page | ✅
+
+
+•	Formulaire
+    o	Derrière la modal, la page photographe doit être grisé | ✅
+    o	La modal doit pouvoir se fermer avec la touche ESC | ✅
+    o	La croix doit être dans la tabulation | ✅
+    o	Tous les inputs sont obligatoires
+    o	Mettre en place
+
+	la validation des inputs
+
+	l’accessibilité
+
+•	Les likes doit être vide quand on arrive sur la page | ✅
+
+•	Commencer le système de tri
+
+\\\\\\\\\\\\\\\\ QUESTION \\\\\\\\\\\\\\\\\\\\\\
+aria-pressed="false" sur le role="bouton"
+
+
+-------------------
+ | ✅ Fait
+ | ❌ Erreur
+ | ⚠ Question

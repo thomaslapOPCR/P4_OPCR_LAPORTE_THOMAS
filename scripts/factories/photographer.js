@@ -71,12 +71,12 @@ function MediaFactory(data) {
     Media.setAttribute('aria-label', title);
 
     Media.innerHTML = `
-                <a class="media" href="#" aria-label="${title}, closeup view">
+                <a class="media" href="#" tabindex="0" aria-label="${title}, closeup view" enterkeyhint="enter">
                     ${mediaSupport}
                 </a>
                 <div class="titleAndLikes">
                     <h3 class="media-title">${title}</h3>
-                    <p class="media-likes" aria-label="likes" tabindex="0" role="button" aria-pressed="false">${likes}<i class="fal fa-heart"></i></i></p>
+                    <p class="media-likes" aria-label="likes" tabindex="0" role="button" enterkeyhint="enter">${likes}<i class="fal fa-heart"></i></i></p>
                 </div>
            `;
     return (Media);
