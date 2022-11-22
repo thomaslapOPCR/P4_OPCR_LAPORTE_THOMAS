@@ -16,10 +16,10 @@
     o	Derrière la modal, la page photographe doit être grisé | ✅
     o	La modal doit pouvoir se fermer avec la touche ESC | ✅
     o	La croix doit être dans la tabulation | ✅
-    o	Tous les inputs sont obligatoires
-    o	Mettre en place
+    o	Tous les inputs sont obligatoires  | ✅
+    o	Mettre en place  | ✅
 
-	la validation des inputs
+	la validation des inputs  | ✅
 
 	l’accessibilité
 

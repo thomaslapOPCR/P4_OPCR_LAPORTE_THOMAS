@@ -1,6 +1,6 @@
 async function fillName() {
-  const test = await window.getPhotographers();
-  test.forEach((el) => {
+  const name = await window.getPhotographers();
+  name.forEach((el) => {
     const photographerName = document.querySelector('#Photographer-name');
     photographerName.innerHTML = el.name;
   });
@@ -42,11 +42,10 @@ function submit() {
     change(lastname,regGen,'Veuillez entrer 2 caractères ou plus pour le champ du nom');
     change(email,regEmail,'Veuillez entrer un email valide pour ce champ.');
     change(message,regGen,'Veuillez entrer 2 caractères ou plus pour le champ du prénom');
-
-
-  submit.onsubmit = function (e) {
+  console.log("test")
+  form.onsubmit = function (e) {
     e.preventDefault();
-
+    console.log("test1")
     if(checkValidity(firstname.parentElement) === "true" &&
         checkValidity(lastname.parentElement) === "true"  &&
         checkValidity(email.parentElement) === "true"  &&
@@ -70,13 +69,12 @@ function submit() {
 
 function change(elements,regex,msg){
   const form = document.querySelector('#form')
-
   elements.oninput = (e) => {
     e.preventDefault();
     InputValidate(elements, regex, msg);
   };
-
   form.addEventListener('submit', (e)=>{
+    console.log("test3")
     e.preventDefault();
     InputValidate(elements, regex, msg);
   })
