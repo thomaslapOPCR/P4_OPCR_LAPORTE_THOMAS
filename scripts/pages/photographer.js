@@ -44,10 +44,10 @@ function getId() {
   const link = new URL(window.location.href);
   const searchParams = new URLSearchParams(link.search);
   let IdList = ["82","195","243","527","925","930"].includes(searchParams.get('id'))
-
-  if (!searchParams.has('id') || !IdList) {
+  //|| !IdList
+  if (!searchParams.has('id') ) {
     console.error('Aucun parametre ID');
-    return location.href = "index.html"
+    // return location.href = "index.html"
   }
 
   return searchParams.get('id');

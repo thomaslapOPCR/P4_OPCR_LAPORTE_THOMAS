@@ -26,21 +26,64 @@ function closeModal() {
       modal.style.display = 'none';
     }
   }
-
 }
 
 function submit() {
-  const form = document.querySelector('#submit');
+  const submit = document.querySelector('#submit');
+  const form = document.querySelector('#form')
+  const firstname = document.querySelector('#firstname');
+  const lastname = document.querySelector('#lastname');
+  const email = document.querySelector('#email');
+  const message = document.querySelector('#message');
   const regEmail = new RegExp(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/);
   const regGen = new RegExp(/^.{2,}$/);
 
-  form.onsubmit = function (e) {
+    change(firstname,regGen,'Veuillez entrer 2 caractères ou plus pour le champ du prénom');
+    change(lastname,regGen,'Veuillez entrer 2 caractères ou plus pour le champ du nom');
+    change(email,regEmail,'Veuillez entrer un email valide pour ce champ.');
+    change(message,regGen,'Veuillez entrer 2 caractères ou plus pour le champ du prénom');
+
+
+  submit.onsubmit = function (e) {
     e.preventDefault();
+
+    if(checkValidity(firstname.parentElement) === "true" &&
+        checkValidity(lastname.parentElement) === "true"  &&
+        checkValidity(email.parentElement) === "true"  &&
+        checkValidity(message.parentElement) === "true")
+    {
+      console.log('Valide')
+      form.reset();
+      const modal = document.getElementById('contact_modal');
+      modal.style.display = 'none';
+        asginErrorOrValidity(firstname.parentElement, false, '', false, false);
+        asginErrorOrValidity(lastname.parentElement, false, '', false, false);
+        asginErrorOrValidity(email.parentElement, false, '', false, false);
+        asginErrorOrValidity(message.parentElement, false, '', false, false);
+    }else {
+      console.log('erreur')
+      return false
+    }
+  }
+
+}
+
+function change(elements,regex,msg){
+  const form = document.querySelector('#form')
+
+  elements.oninput = (e) => {
+    e.preventDefault();
+    InputValidate(elements, regex, msg);
   };
+
+  form.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    InputValidate(elements, regex, msg);
+  })
+
 }
 
 function checkValidity(elements) {
-  if (elements.getAttribute('data-valid') === null) return false;
   return elements.getAttribute('data-valid');
 }
 
@@ -52,14 +95,9 @@ function asginErrorOrValidity(Elements, dataValid, message, errVisible, validVis
 }
 
 function InputValidate(elements, regex, message) {
-  const checkValidValue = regex.test(elements.value); // test de confirmitée des regex
-  // verifie si le champ est vide Ou non
-  if (elements.value.length <= 0) {
-    asginErrorOrValidity(elements.parentElement, false, message, true, false);
-    return false;
-  }
+  const checkValidValue = regex.test(elements.value);
   if (regex === null) return;
-  // realise le test est assigne un message d'erreur ou de validation
+
   if (checkValidValue) {
     asginErrorOrValidity(elements.parentElement, true, '', false, true);
   } else {

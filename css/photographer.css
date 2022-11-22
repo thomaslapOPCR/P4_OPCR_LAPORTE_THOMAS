@@ -321,12 +321,12 @@ form div[data-valid-visible="true"]::after {
     opacity: 1;
 }
 form div[data-valid-visible="true"] .text-control {
-    border: 2px solid #0b8613;
+    border: 3px solid #00ea0e;
 }
 .formData[data-error]::after {
     content: attr(data-error);
-    font-size: 0.4em;
-    color: #e54858;
+    font-size: 1.5em;
+    color: #ff001d;
     display: block;
     margin-top: 7px;
     margin-bottom: 7px;
@@ -339,9 +339,8 @@ form div[data-valid-visible="true"] .text-control {
     opacity: 1;
 }
 .formData[data-error-visible="true"] .text-control {
-    border: 2px solid #e54858;
+    border: 3px solid #fb0824;
 }
-
 
 form input, form textarea {
     width: 100%;
