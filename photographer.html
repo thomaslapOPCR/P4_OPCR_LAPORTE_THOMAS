@@ -19,10 +19,10 @@
 <!-- 	    select liste pour le tri -->
 	  <section class="sort">
 		    <p>Trier par</p>
-		  <section class="" id="selectlist" onclick="openSelectMenu()" tabindex="0">
-			  <p class="">Popularité</p>
-			  <p class="">Date</p>
-			  <p class="">Titre</p>
+		  <section class="" id="selectlist" onclick="openSelectMenu()" tabindex="0" role="button">
+			  <p class="" tabindex="0">Popularité</p>
+			  <p class="" tabindex="0">Date</p>
+			  <p class="" tabindex="0">Titre</p>
 		  </section>
 	  </section>
 <!-- 	  Zone des media -->
@@ -48,7 +48,7 @@
 <!-- 	    </section> -->
 <!-- 	     -->
     </main>
-    <div id="contact_modal">
+    <div id="contact_modal" aria-hidden="true" role=”dialog”  aria-describedby="modalTitle">
 			<div class="modal">
 				<div class="header">
 					<div class="text-header">

@@ -1,7 +1,6 @@
 •	Page détail
     o	l'id n'existe pas ou n'existe pas redirection vers la page d'accueil | ✅
     o	bouton "Contactez-moi" ajouter un aria-label | ✅
-    o	card | ⚠
 
 	la mediaFactory ne doit pas être dans le code source de la photographerFactory  | ✅
 
@@ -21,7 +20,7 @@
 
 	la validation des inputs  | ✅
 
-	l’accessibilité
+	l’accessibilité  | ✅
 
 •	Les likes doit être vide quand on arrive sur la page | ✅
 

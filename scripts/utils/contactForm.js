@@ -28,8 +28,7 @@ function closeModal() {
   }
 }
 
-function submit() {
-  const submit = document.querySelector('#submit');
+function submitForm(){
   const form = document.querySelector('#form')
   const firstname = document.querySelector('#firstname');
   const lastname = document.querySelector('#lastname');
@@ -38,33 +37,28 @@ function submit() {
   const regEmail = new RegExp(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/);
   const regGen = new RegExp(/^.{2,}$/);
 
-    change(firstname,regGen,'Veuillez entrer 2 caractères ou plus pour le champ du prénom');
-    change(lastname,regGen,'Veuillez entrer 2 caractères ou plus pour le champ du nom');
-    change(email,regEmail,'Veuillez entrer un email valide pour ce champ.');
-    change(message,regGen,'Veuillez entrer 2 caractères ou plus pour le champ du prénom');
-  console.log("test")
-  form.onsubmit = function (e) {
-    e.preventDefault();
-    console.log("test1")
-    if(checkValidity(firstname.parentElement) === "true" &&
-        checkValidity(lastname.parentElement) === "true"  &&
-        checkValidity(email.parentElement) === "true"  &&
-        checkValidity(message.parentElement) === "true")
-    {
-      console.log('Valide')
-      form.reset();
-      const modal = document.getElementById('contact_modal');
-      modal.style.display = 'none';
-        asginErrorOrValidity(firstname.parentElement, false, '', false, false);
-        asginErrorOrValidity(lastname.parentElement, false, '', false, false);
-        asginErrorOrValidity(email.parentElement, false, '', false, false);
-        asginErrorOrValidity(message.parentElement, false, '', false, false);
-    }else {
-      console.log('erreur')
-      return false
-    }
-  }
+  change(firstname,regGen,'Veuillez entrer 2 caractères ou plus pour le champ du prénom');
+  change(lastname,regGen,'Veuillez entrer 2 caractères ou plus pour le champ du nom');
+  change(email,regEmail,'Veuillez entrer un email valide pour ce champ.');
+  change(message,regGen,'Veuillez entrer 2 caractères ou plus pour le champ du prénom');
 
+  if(checkValidity(firstname.parentElement) === "true" &&
+      checkValidity(lastname.parentElement) === "true"  &&
+      checkValidity(email.parentElement) === "true"  &&
+      checkValidity(message.parentElement) === "true")
+  {
+    console.log('Valide')
+    form.reset();
+    const modal = document.getElementById('contact_modal');
+    modal.style.display = 'none';
+    asginErrorOrValidity(firstname.parentElement, false, '', false, false);
+    asginErrorOrValidity(lastname.parentElement, false, '', false, false);
+    asginErrorOrValidity(email.parentElement, false, '', false, false);
+    asginErrorOrValidity(message.parentElement, false, '', false, false);
+  }else {
+    console.log('erreur')
+    return false
+  }
 }
 
 function change(elements,regex,msg){
@@ -103,5 +97,23 @@ function InputValidate(elements, regex, message) {
   }
 }
 
-submit();
+
+function validate() {
+  const submit = document.querySelector('#submit');
+  const form = document.querySelector('#form')
+  submit.onkeydown = function (e) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      submitForm();
+
+    }
+  }
+  form.onsubmit = function (e) {
+    e.preventDefault();
+    submitForm();
+  }
+}
+
+submitForm();
+validate();
 closeModal();

@@ -16,6 +16,12 @@ function selectFilter() {
     } else {
       el.classList.add('border');
     }
+    console.log(el)
+
+    el.onkeydown = function (e) {
+      const { target } = e;
+      console.log(target.textContent)
+    }
 
     el.onclick = function (e) {
       const { target } = e;
@@ -28,6 +34,7 @@ function selectFilter() {
         elements[index].textContent = defaultName;
       }
     };
+
   });
 }
 
@@ -43,13 +50,11 @@ async function fetchData() {
 function getId() {
   const link = new URL(window.location.href);
   const searchParams = new URLSearchParams(link.search);
-  let IdList = ["82","195","243","527","925","930"].includes(searchParams.get('id'))
-  //|| !IdList
-  if (!searchParams.has('id') ) {
-    console.error('Aucun parametre ID');
-    // return location.href = "index.html"
+  let IdList = ["82","195","243","527","925","930"].includes(searchParams.get('id'));
+  if (!searchParams.has('id') || !IdList) {
+    console.error('parameter ID not found');
+    return location.href = "index.html"
   }
-
   return searchParams.get('id');
 }
 
@@ -102,18 +107,31 @@ async function fillSubBar() {
   for (const i of mediaContent[0].children) {
     const likesElements = i.children[1].lastElementChild;
     let isLiked = false;
+    let likes = parseInt(likesElements.textContent);
+
 
     i.addEventListener('click', (e) => {
       if (e.target.className === 'media-likes') return;
       // openLightBox();
     });
 
-    likesElements.addEventListener(
-      'click',
-      () => {
-        console.log(likesElements);
-        let likes = parseInt(likesElements.textContent);
-        // isLiked  ? likes= parseInt(likes-1) : likes= parseInt(likes+1);
+    likesElements.addEventListener('click', (e)=>{
+      if (isLiked === false) {
+        likes = parseInt(likes + 1);
+        isLiked = true;
+        domLikes.textContent = parseInt(totalLikes += 1).toLocaleString();
+        likesElements.innerHTML = `${likes}<i class="fas fa-heart">`;
+      } else if (isLiked === true) {
+        likes = parseInt(likes - 1);
+        isLiked = false;
+        domLikes.textContent = parseInt(totalLikes -= 1).toLocaleString();
+        likesElements.innerHTML = `${likes}<i class="fal fa-heart">`;
+      }
+    });
+
+    likesElements.onkeydown = function (e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
         if (isLiked === false) {
           likes = parseInt(likes + 1);
           isLiked = true;
@@ -125,9 +143,8 @@ async function fillSubBar() {
           domLikes.textContent = parseInt(totalLikes -= 1).toLocaleString();
           likesElements.innerHTML = `${likes}<i class="fal fa-heart">`;
         }
-
-      },
-    );
+      }
+    }
   }
 }
 
