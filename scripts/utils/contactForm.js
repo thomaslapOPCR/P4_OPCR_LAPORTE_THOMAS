@@ -1,5 +1,5 @@
 async function fillName() {
-  const name = await window.getPhotographers();
+  const name = await getPhotographers();
   name.forEach((el) => {
     const photographerName = document.querySelector('#Photographer-name');
     photographerName.innerHTML = el.name;

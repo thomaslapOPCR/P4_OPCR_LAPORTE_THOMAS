@@ -16,11 +16,9 @@ function selectFilter() {
     } else {
       el.classList.add('border');
     }
-    console.log(el)
-
     el.onkeydown = function (e) {
       const { target } = e;
-      console.log(target.textContent)
+      asingSort(target.textContent)
     }
 
     el.onclick = function (e) {
@@ -32,6 +30,7 @@ function selectFilter() {
         elements[0].innerHTML += cursorI;
         elements[0].firstElementChild.classList.toggle('rotate');
         elements[index].textContent = defaultName;
+        asingSort(elements[0].textContent);
       }
     };
 
@@ -60,12 +59,10 @@ function getId() {
 
 async function getMedia() {
   const mediaData = await fetchData();
-
-  return mediaData.media.filter((el) => {
-    const id = el.photographerId;
-    return id.toString() === getId();
-  });
+  return mediaData.media.filter((el) => el.photographerId.toString() === getId());
 }
+
+
 
 async function getPhotographers() {
   const data = await fetchData();
@@ -75,8 +72,8 @@ async function getPhotographers() {
 async function displayData(photographers, media) {
   const photographersSection = document.querySelector('.photograph-header');
   const mediaSection = document.querySelector('#Media-Content');
-  const mediaSectionCard = document.querySelector('.Media-card');
-
+  // const mediaSectionCard = document.querySelector('.Media-card');
+  //
   photographers.forEach((photographer) => {
     const photographerModel = photographerMediaFactory(photographer);
     photographersSection.innerHTML = photographerModel.getUserCardDOM();
@@ -114,43 +111,31 @@ async function fillSubBar() {
       if (e.target.className === 'media-likes') return;
       // openLightBox();
     });
+    function likeUtils (CalcLikes,CalcTotalLike,islike,iconsHeart) {
+      likes = parseInt(CalcLikes)
+      isLiked = islike
+      domLikes.textContent = parseInt(CalcTotalLike).toLocaleString()
+      likesElements.innerHTML = `${likes} ` + iconsHeart;
+    }
+
+     function like() {
+       return isLiked ? likeUtils(likes - 1, totalLikes -= 1, false, '<i class="fal fa-heart">') : likeUtils(likes + 1, totalLikes += 1, true, '<i class="fas fa-heart">')
+     }
+
 
     likesElements.addEventListener('click', (e)=>{
-      if (isLiked === false) {
-        likes = parseInt(likes + 1);
-        isLiked = true;
-        domLikes.textContent = parseInt(totalLikes += 1).toLocaleString();
-        likesElements.innerHTML = `${likes}<i class="fas fa-heart">`;
-      } else if (isLiked === true) {
-        likes = parseInt(likes - 1);
-        isLiked = false;
-        domLikes.textContent = parseInt(totalLikes -= 1).toLocaleString();
-        likesElements.innerHTML = `${likes}<i class="fal fa-heart">`;
-      }
+      like()
     });
 
     likesElements.onkeydown = function (e) {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        if (isLiked === false) {
-          likes = parseInt(likes + 1);
-          isLiked = true;
-          domLikes.textContent = parseInt(totalLikes += 1).toLocaleString();
-          likesElements.innerHTML = `${likes}<i class="fas fa-heart">`;
-        } else if (isLiked === true) {
-          likes = parseInt(likes - 1);
-          isLiked = false;
-          domLikes.textContent = parseInt(totalLikes -= 1).toLocaleString();
-          likesElements.innerHTML = `${likes}<i class="fal fa-heart">`;
-        }
-      }
+      if(e.keyCode ='Enter') like()
     }
   }
 }
 
-function accessibility() {
-
-}
+// function accessibility() {
+//
+// }
 // lightBox
 
 
