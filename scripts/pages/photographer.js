@@ -1,41 +1,4 @@
-function openSelectMenu() {
-  const cursor = document.querySelector('#cursor');
-  const selector = document.querySelector('#selectlist');
-  selector.classList.toggle('active');
-  cursor.classList.toggle('rotate');
-}
 
-function selectFilter() {
-  const list = document.querySelectorAll('#selectlist p');
-  const cursorI = '<i id="cursor" class="fas fa-angle-down"></i>';
-
-  list.forEach((el, index) => {
-    if (index === 0) {
-      el.classList.remove('border');
-      el.innerHTML += cursorI;
-    } else {
-      el.classList.add('border');
-    }
-    el.onkeydown = function (e) {
-      const { target } = e;
-      asingSort(target.textContent)
-    }
-
-    el.onclick = function (e) {
-      const { target } = e;
-      const elements = document.querySelector('#selectlist').children;
-      if (target !== elements[0]) {
-        const defaultName = elements[0].textContent;
-        elements[0].textContent = elements[index].textContent;
-        elements[0].innerHTML += cursorI;
-        elements[0].firstElementChild.classList.toggle('rotate');
-        elements[index].textContent = defaultName;
-        asingSort(elements[0].textContent);
-      }
-    };
-
-  });
-}
 
 async function fetchData() {
   try {
@@ -72,8 +35,7 @@ async function getPhotographers() {
 async function displayData(photographers, media) {
   const photographersSection = document.querySelector('.photograph-header');
   const mediaSection = document.querySelector('#Media-Content');
-  // const mediaSectionCard = document.querySelector('.Media-card');
-  //
+
   photographers.forEach((photographer) => {
     const photographerModel = photographerMediaFactory(photographer);
     photographersSection.innerHTML = photographerModel.getUserCardDOM();
@@ -86,7 +48,7 @@ async function displayData(photographers, media) {
 }
 
 async function init() {
-  await displayData(await getPhotographers(), await getMedia());
+  await displayData(await getPhotographers(), await asingSort());
 }
 
 async function fillSubBar() {
@@ -111,6 +73,7 @@ async function fillSubBar() {
       if (e.target.className === 'media-likes') return;
       // openLightBox();
     });
+
     function likeUtils (CalcLikes,CalcTotalLike,islike,iconsHeart) {
       likes = parseInt(CalcLikes)
       isLiked = islike
@@ -122,8 +85,7 @@ async function fillSubBar() {
        return isLiked ? likeUtils(likes - 1, totalLikes -= 1, false, '<i class="fal fa-heart">') : likeUtils(likes + 1, totalLikes += 1, true, '<i class="fas fa-heart">')
      }
 
-
-    likesElements.addEventListener('click', (e)=>{
+    likesElements.addEventListener('click', ()=>{
       like()
     });
 
@@ -142,4 +104,4 @@ async function fillSubBar() {
 
 init();
 fillSubBar();
-selectFilter();
+
