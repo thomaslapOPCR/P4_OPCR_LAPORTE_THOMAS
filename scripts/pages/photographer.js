@@ -1,5 +1,3 @@
-
-
 async function fetchData() {
   try {
     const res = await fetch('../../data/photographers.json');
@@ -24,8 +22,6 @@ async function getMedia() {
   const mediaData = await fetchData();
   return mediaData.media.filter((el) => el.photographerId.toString() === getId());
 }
-
-
 
 async function getPhotographers() {
   const data = await fetchData();

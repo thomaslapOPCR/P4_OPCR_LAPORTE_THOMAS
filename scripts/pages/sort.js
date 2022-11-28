@@ -22,7 +22,7 @@ function selectFilter() {
             asingSort(target.textContent)
         }
 
-        el.onclick = function (e) {
+        el.onclick = async function (e) {
             const { target } = e;
             const elements = document.querySelector('#selectlist').children;
             if (target !== elements[0]) {
@@ -39,15 +39,15 @@ function selectFilter() {
 
 
 async function asingSort(element){
-
     const data = []
     for(let i of await getMedia()) data.push(i);
+
+    // console.log('sort: asignSort(element)',data);
 
     switch (element){
         case "Popularité":{
             return data.sort((a, b) => b.likes - a.likes)
         }
-
         case "Date":{
             return data.sort((a, b) => b.date - a.date)
         }
