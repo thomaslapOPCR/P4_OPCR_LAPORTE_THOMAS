@@ -20,11 +20,11 @@
 
 	la validation des inputs  | ✅
 
-	l’accessibilité  | ✅
+	l’accessibilité  | ✅ ? ⚠
 
 •	Les likes doit être vide quand on arrive sur la page | ✅
 
-•	Commencer le système de tri
+•	Commencer le système de tri  | ✅
 
 \\\\\\\\\\\\\\\\ QUESTION \\\\\\\\\\\\\\\\\\\\\\
 aria-pressed="false" sur le role="bouton"

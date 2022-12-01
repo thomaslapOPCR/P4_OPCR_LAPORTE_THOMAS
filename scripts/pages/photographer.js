@@ -38,12 +38,14 @@ async function displayData(photographers, media) {
   });
 
   media.forEach((media) => {
+    // console.log(media)
     const mediaModel = MediaFactory(media);
     mediaSection.appendChild(mediaModel.getMediaCardDOM());
   });
 }
 
 async function init() {
+
   await displayData(await getPhotographers(), await asingSort());
 }
 

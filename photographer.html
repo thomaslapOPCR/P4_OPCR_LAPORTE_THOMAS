@@ -19,10 +19,16 @@
 <!-- 	    select liste pour le tri -->
 	  <section class="sort">
 		    <p>Trier par</p>
-		  <section class="" id="selectlist" onclick="openSelectMenu()" tabindex="0" role="button">
-			  <p class="" tabindex="0">Popularité</p>
-			  <p class="" tabindex="0">Date</p>
-			  <p class="" tabindex="0">Titre</p>
+<!-- 		    <select id="selectlist"> -->
+<!-- 			    <option value="Popularité">Popularité</option> -->
+<!-- 			    <option value="Date">Date</option> -->
+<!-- 			    <option value="Titre">Titre</option> -->
+<!-- 		    </select> -->
+		  <section class="" id="selectlist" tabindex="0" role="button">
+			  <p class="Selected"><span id="selected">Popularité</span> <i id="cursor" class="fas fa-angle-down"></i></p>
+			  <p class="border" >Popularité</p>
+			  <p class="border" >Date</p>
+			  <p class="border" >Titre</p>
 		  </section>
 	  </section>
 <!-- 	  Zone des media -->
@@ -73,7 +79,7 @@
 					
 					<div class="formData">
 						<label for="email">Email</label>
-						<input  class="text-control"  type="text" id="email"/>
+						<input  class="text-control"  type="email" id="email"/>
 					</div>
 					
 					<div class="formData">

@@ -1,38 +1,56 @@
-function openSelectMenu() {
+OpenFilters();
+selectFilter();
+
+
+function OpenFilters() {
     const cursor = document.querySelector('#cursor');
     const selector = document.querySelector('#selectlist');
-    selector.classList.toggle('active');
-    cursor.classList.toggle('rotate');
+
+    function open(){
+        selector.classList.toggle('active');
+        cursor.classList.toggle('rotate');
+        if(selector.getAttribute('class') !== 'active'){
+            selector.children[1].setAttribute('tabindex', '');
+            selector.children[2].setAttribute('tabindex', '');
+            selector.children[3].setAttribute('tabindex', '');
+        }
+        if(selector.getAttribute('class') === 'active'){
+            selector.children[1].setAttribute('tabindex', '0');
+            selector.children[2].setAttribute('tabindex', '0');
+            selector.children[3].setAttribute('tabindex', '0');
+        }
+    }
+
+    selector.onclick = function (){
+        open();
+    }
+
+    selector.onkeydown = function (e) {
+        if(e.key === "Enter") {
+            open();
+        }
+    }
 }
 
 
 function selectFilter() {
     const list = document.querySelectorAll('#selectlist p');
-    const cursorI = '<i id="cursor" class="fas fa-angle-down"></i>';
-    let sortElement = '';
+
     list.forEach((el, index) => {
-        if (index === 0) {
-            el.classList.remove('border');
-            el.innerHTML += cursorI;
-        } else {
-            el.classList.add('border');
+
+        function openSelectMenu() {
+            const elements = document.querySelector('#selectlist').children;
+            const selected = document.querySelector('#selected')
+            selected.textContent = elements[index].textContent;
+            return selected.textContent;
         }
+
         el.onkeydown = function (e) {
-            const { target } = e;
-            asingSort(target.textContent)
+            if(e.key === "Enter" ) asingSort(openSelectMenu())
         }
 
         el.onclick = async function (e) {
-            const { target } = e;
-            const elements = document.querySelector('#selectlist').children;
-            if (target !== elements[0]) {
-                const defaultName = elements[0].textContent;
-                elements[0].textContent = elements[index].textContent;
-                elements[0].innerHTML += cursorI;
-                elements[0].firstElementChild.classList.toggle('rotate');
-                elements[index].textContent = defaultName;
-                asingSort(elements[0].textContent)
-            }
+            asingSort(openSelectMenu())
         };
     });
 }
@@ -41,19 +59,29 @@ function selectFilter() {
 async function asingSort(element){
     const data = []
     for(let i of await getMedia()) data.push(i);
+    const mediaSection = document.querySelector('#Media-Content');
 
-    // console.log('sort: asignSort(element)',data);
+    async function remove(media){
+            while( mediaSection.firstChild) mediaSection.removeChild( mediaSection.firstChild)
+    }
 
     switch (element){
         case "Popularité":{
-            return data.sort((a, b) => b.likes - a.likes)
+           await remove();
+            const media = data.sort((a, b) => b.likes - a.likes)
+            displayData(await getPhotographers(),await media);
+            break;
         }
         case "Date":{
-            return data.sort((a, b) => b.date - a.date)
+            await remove();
+            const media = data.sort((a, b) => b.date - a.date)
+            displayData(await getPhotographers(),await media);
+              break;
         }
 
         case "Titre":{
-             return data.sort((a, b) => {
+            await remove();
+            const media =  data.sort((a, b) => {
                 if (b.title > a.title) {
                     return -1
                 }
@@ -62,6 +90,8 @@ async function asingSort(element){
                 }
                 return 0
             })
+            displayData(await getPhotographers(),await media);
+            break;
         }
         default:{
             return data.sort((a, b) => b.likes - a.likes)
@@ -69,4 +99,5 @@ async function asingSort(element){
     }
 }
 
-selectFilter();
+
+

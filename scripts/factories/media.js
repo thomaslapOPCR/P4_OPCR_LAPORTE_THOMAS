@@ -31,23 +31,34 @@ function MediaFactory(data) {
     const videoSrc = `assets/photos/${photographerId}/${video}`;
     let mediaSupport;
 
+    // console.log(title,image)
+    // if(video === undefined || image === undefined ){
+    //     console.log('test')
+    //     mediaSupport = `<img src="asset/images/InvalidImage.png" alt="Image invalide ${title}">`;
+    // }
+    //
+
+
     if (data.video !== undefined) {
         mediaSupport = `<video src="${videoSrc}" type="video/mp4" aria-label="video ${title}"></video>`;
     } else if (data.image !== undefined) {
         mediaSupport = `<img src="${picture}" alt="${title}">`;
     }
 
+
     function getMediaCardDOM() {
-        const Media = document.createElement('article');
+        const Media = document.createElement('a');
         Media.setAttribute('id', id);
         Media.setAttribute('data-date', date);
+        Media.setAttribute('href', "#");
         Media.setAttribute('class', 'Media-card');
-        Media.setAttribute('aria-label', title);
+        Media.setAttribute('aria-label',  title+"closeup view");
+        Media.setAttribute('tabindex', 0);
 
         Media.innerHTML = `
-                <a class="media" href="#" tabindex="0" aria-label="${title}, closeup view" enterkeyhint="enter">
+                <div class="media" >
                     ${mediaSupport}
-                </a>
+                </div>
                 <div class="titleAndLikes">
                     <h3 class="media-title">${title}</h3>
                     <p class="media-likes" aria-label="likes" tabindex="0" role="button" enterkeyhint="enter">${likes}<i class="fal fa-heart"></i></i></p>

@@ -131,8 +131,9 @@ main  {
 }
 
 #selectlist p:hover {
-    text-decoration: underline;
+    background-color: #D3573C;
 }
+
 
 #selectlist p:first-child {
     border-top: none;
@@ -140,8 +141,12 @@ main  {
     text-decoration: none;
 }
 
+#selectlist p:first-child:hover {
+    background-color: transparent;
+}
 
 #cursor {
+    pointer-events: none;
     transform: rotate(0deg);
     transition: transform .4s;
 }
@@ -164,7 +169,7 @@ main  {
 }
 
 
-#Media-Content article{
+#Media-Content a {
     height: 350px;
     min-width:  350px;
     width: 30%;
@@ -172,15 +177,17 @@ main  {
     border-radius: 5px;
     background: rgba(239, 238, 238, 0.17);
     /* flex-grow: 1; */
+    text-decoration: none;
+    z-index: 1;
 }
 
-#Media-Content article:hover {
+#Media-Content a:hover {
     cursor: zoom-in;
     transform: scale(1.01);
     transition: transform .5s;
 }
 
-#Media-Content article .titleAndLikes {
+#Media-Content a .titleAndLikes {
     display: flex;
     justify-content: space-between;
     font-style: normal;
@@ -189,9 +196,10 @@ main  {
     line-height: 31px;
     padding: 0 10px;
     color: #911C1C;
+    z-index: 2;
 }
 
-#Media-Content article .titleAndLikes p {
+#Media-Content a .titleAndLikes p {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -202,11 +210,11 @@ main  {
     line-height: 19px;
 }
 
-#Media-Content article .titleAndLikes p i {
+#Media-Content a .titleAndLikes p i {
     padding-bottom: 2px;
 }
 
-#Media-Content article .titleAndLikes .media-likes:hover{
+#Media-Content a .titleAndLikes .media-likes:hover{
     cursor: pointer;
     transform: scale(1.2);
     transition: transform .3s;
@@ -366,6 +374,7 @@ form input, form textarea {
     height: 50px;
     border-radius: 5px;
     background-color: #DB8876;
+    z-index: 2;
 }
 
 #subMenu .likes ,

@@ -16,7 +16,7 @@ function displayModal() {
 function closeModal() {
   const modal = document.getElementById('contact_modal');
   const exit = document.querySelector('#exit-modal');
-
+  const form = document.querySelector('#form')
   exit.onclick = function () {
     modal.style.display = 'none';
   }
@@ -24,6 +24,7 @@ function closeModal() {
     if (event.key === "Escape") {
       event.preventDefault();
       modal.style.display = 'none';
+      form.reset();
     }
   }
 }
