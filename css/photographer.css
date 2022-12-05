@@ -178,7 +178,6 @@ main  {
     background: rgba(239, 238, 238, 0.17);
     /* flex-grow: 1; */
     text-decoration: none;
-    z-index: 1;
 }
 
 #Media-Content a:hover {

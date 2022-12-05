@@ -11,19 +11,37 @@ function displayModal() {
   const modal = document.getElementById('contact_modal');
   fillName();
   modal.style.display = 'block';
+  document.querySelector('#firstname').focus()
 }
 // eslint-disable-next-line
 function closeModal() {
   const modal = document.getElementById('contact_modal');
   const exit = document.querySelector('#exit-modal');
   const form = document.querySelector('#form')
+
+
+  const firstname = document.querySelector('#firstname');
+  const lastname = document.querySelector('#lastname');
+  const email = document.querySelector('#email');
+  const message = document.querySelector('#message');
   exit.onclick = function () {
     modal.style.display = 'none';
+    resetForm([firstname,lastname,email,message])
+  }
+
+  exit.onkeydown = function (event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      modal.style.display = 'none';
+      resetForm([firstname,lastname,email,message])
+      form.reset();
+    }
   }
   document.onkeydown = function (event) {
     if (event.key === "Escape") {
       event.preventDefault();
       modal.style.display = 'none';
+      resetForm([firstname,lastname,email,message])
       form.reset();
     }
   }
@@ -36,12 +54,12 @@ function submitForm(){
   const email = document.querySelector('#email');
   const message = document.querySelector('#message');
   const regEmail = new RegExp(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/);
-  const regGen = new RegExp(/^.{2,}$/);
+  const regGen = new RegExp('^[a-zA-Z-]{10,2000}(\\s[a-zA-Z]{1,})*$')
 
-  change(firstname,regGen,'Veuillez entrer 2 caractères ou plus pour le champ du prénom');
-  change(lastname,regGen,'Veuillez entrer 2 caractères ou plus pour le champ du nom');
+  change(firstname,regGen,'Veuillez entrer 5 caractères ou plus pour le champ du prénom');
+  change(lastname,regGen,'Veuillez entrer 5 caractères ou plus pour le champ du nom');
   change(email,regEmail,'Veuillez entrer un email valide pour ce champ.');
-  change(message,regGen,'Veuillez entrer 2 caractères ou plus pour le champ du prénom');
+  change(message,regGen,'Veuillez entrer 5 caractères ou plus pour le champ du message');
 
   if(checkValidity(firstname.parentElement) === "true" &&
       checkValidity(lastname.parentElement) === "true"  &&
@@ -106,7 +124,6 @@ function validate() {
     if (e.key === "Enter") {
       e.preventDefault();
       submitForm();
-
     }
   }
   form.onsubmit = function (e) {
@@ -114,6 +131,11 @@ function validate() {
     submitForm();
   }
 }
+
+function resetForm(Elements) {
+  for(let i of Elements) asginErrorOrValidity(i.parentElement, true, '', false, false);
+}
+
 
 submitForm();
 validate();
