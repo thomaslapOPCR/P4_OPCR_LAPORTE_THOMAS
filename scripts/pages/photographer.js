@@ -103,7 +103,7 @@ function fillLightBox() {
   ClonedAllImage.controls = true;
 
   lightbox.classList.add('active');
-
+  lightbox.focus();
   media.appendChild(ClonedAllImage)
   ClonedAllImage.classList.add('active')
 
@@ -119,13 +119,25 @@ function fillLightBox() {
     e.preventDefault()
     closeLightBox();
   }
+
   exit.onkeydown = function (e) {
     e.preventDefault()
     if(e.key === "Enter") closeLightBox();
   }
+
   document.onkeydown = function (e) {
-    e.preventDefault()
     if (e.key === "Escape") closeLightBox();
+    if(e.key === "ArrowLeft") left();
+    if(e.key === "ArrowRight") right()
+  }
+  leftArrow.onkeydown = function (e) {
+    e.preventDefault()
+    if(e.key === "Enter") left();
+  }
+
+  rightArrow.onkeydown = function (e) {
+    e.preventDefault()
+    if(e.key === "Enter") left();
   }
 
   leftArrow.addEventListener('click',(e)=>{
@@ -137,6 +149,9 @@ function fillLightBox() {
     e.preventDefault();
     right()
   })
+
+
+
 
   function left(){
     AllImage[counter].classList.remove('active')
