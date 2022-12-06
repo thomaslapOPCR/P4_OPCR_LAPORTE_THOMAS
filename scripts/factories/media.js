@@ -22,7 +22,6 @@ function photographerMediaFactory(data) {
 }
 // eslint-disable-next-line
 function MediaFactory(data) {
-    let datatype = '';
     const {
         date, id, photographerId, image, video, likes, title, price,
     } = data;
@@ -40,27 +39,27 @@ function MediaFactory(data) {
 
 
     if (data.video !== undefined) {
-        mediaSupport = `<video src="${videoSrc}" type="video/mp4" aria-label="video ${title}"></video>`;
         datatype = 'video';
+        mediaSupport = `<video id="M${id}" class="media ${datatype}" src="${videoSrc}" type="video" aria-label="video ${title}"></video>`;
+
     } else if (data.image !== undefined) {
-        mediaSupport = `<img src="${picture}" alt="${title}">`;
         datatype = 'img'
+        mediaSupport = `<img id="M${id}" class="media ${datatype}" src="${picture}" alt="${title}">`;
+
     }
 
 
     function getMediaCardDOM() {
-        const Media = document.createElement('a');
+        const Media = document.createElement('article');
         Media.setAttribute('id', id);
         Media.setAttribute('data-date', date);
-        Media.setAttribute('href', `javascript:openLightBox(${id});`);
         Media.setAttribute('class', 'Media-card');
-        Media.setAttribute('aria-label',  title+"closeup view");
-        Media.setAttribute('tabindex', 0);
+        Media.setAttribute('tabindex', '');
 
         Media.innerHTML = `
-                <div class="media" data-type="${datatype}">
+                <a href="javascript:fillLightBox();"  aria-label="${title + "closeup view"}" tabindex="0">
                     ${mediaSupport}
-                </div>
+                </a>
                 <div class="titleAndLikes">
                     <h3 class="media-title">${title}</h3>
                     <p class="media-likes" aria-label="likes" tabindex="0" role="button" enterkeyhint="enter">${likes}<i class="fal fa-heart"></i></i></p>

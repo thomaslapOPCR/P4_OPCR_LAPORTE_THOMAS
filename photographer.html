@@ -43,16 +43,6 @@
 			  <p id="price"> / jour</p>
 		  </article>
 	  </section>
-<!-- 	    lightBox -->
-<!-- 	    <section id="lightBox" aria-label="image closeup view">&lt;!&ndash;  pos r &ndash;&gt; -->
-<!-- 		    <div class="close">X</div>     &lt;!&ndash;  pos a t0 r0 &ndash;&gt; -->
-<!-- 		    <div class="image-box"> -->
-<!-- 			    <i></i> -->
-<!-- 			    <img src="" alt=""> -->
-<!-- 			    <i></i> -->
-<!-- 		    </div> -->
-<!-- 	    </section> -->
-<!-- 	     -->
     </main>
     <div id="contact_modal" aria-hidden="true" role=”dialog” aria-describedby="modalTitle" aria-modal="true" aria-label="closeup view">
 			<div class="modal">
@@ -90,13 +80,13 @@
 				</form>
 			</div>
 	</div>
-   <section id="lightBox">
+   <section id="lightBox" >
 	  <section class="lightbox">
 		  <i id="exit-lightbox" role="button" tabindex="0" class="fal fa-times"></i>
 		  <div>
-			  <i class="fas fa-chevron-left"></i>
+			  <i role="button" id="left" class="fas fa-chevron-left"></i>
 			  <div id="MediaLightbox"></div>
-			  <i class="fas fa-chevron-right"></i>
+			  <i role="button"  id="right" class="fas fa-chevron-right"></i>
 		  </div>
 		  <p class="lightbox-title">test</p>
 	  </section>

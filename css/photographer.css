@@ -169,7 +169,7 @@ main  {
 }
 
 
-#Media-Content a {
+#Media-Content article {
     height: 350px;
     min-width:  350px;
     width: 30%;
@@ -180,13 +180,18 @@ main  {
     text-decoration: none;
 }
 
-#Media-Content a:hover {
+#Media-Content article .media-support {
+    width: 100%;
+    height: 100%;
+}
+
+#Media-Content article:hover {
     cursor: zoom-in;
     transform: scale(1.01);
     transition: transform .5s;
 }
 
-#Media-Content a .titleAndLikes {
+#Media-Content article .titleAndLikes {
     display: flex;
     justify-content: space-between;
     font-style: normal;
@@ -198,7 +203,7 @@ main  {
     z-index: 2;
 }
 
-#Media-Content a .titleAndLikes p {
+#Media-Content article .titleAndLikes p {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -209,11 +214,11 @@ main  {
     line-height: 19px;
 }
 
-#Media-Content a .titleAndLikes p i {
+#Media-Content article .titleAndLikes p i {
     padding-bottom: 2px;
 }
 
-#Media-Content a .titleAndLikes .media-likes:hover{
+#Media-Content article .titleAndLikes .media-likes:hover{
     cursor: pointer;
     transform: scale(1.2);
     transition: transform .3s;
@@ -433,7 +438,6 @@ form input, form textarea {
     justify-content: center;
     align-items: center;
     gap: 30px;
-    background-color: red;
     height: 80%;
 }
 #lightBox .lightbox div #MediaLightbox {
@@ -441,10 +445,16 @@ form input, form textarea {
     width: 100%;
     height: 100%;
 }
-
 #lightBox .lightbox div #MediaLightbox img,
 #lightBox .lightbox div #MediaLightbox video
 {
+   display: none;
+}
+
+#lightBox .lightbox div #MediaLightbox img.active,
+#lightBox .lightbox div #MediaLightbox video.active
+{
+    display: block;
     height: 100%;
 }
 

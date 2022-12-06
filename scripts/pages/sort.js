@@ -67,7 +67,7 @@ async function asingSort(element){
     for(let i of await getMedia()) data.push(i);
     const mediaSection = document.querySelector('#Media-Content');
 
-    async function remove(media){
+    async function remove(){
             while( mediaSection.firstChild) mediaSection.removeChild( mediaSection.firstChild)
     }
 
