@@ -87,7 +87,6 @@ function change(elements,regex,msg){
     InputValidate(elements, regex, msg);
   };
   form.addEventListener('submit', (e)=>{
-    console.log("test3")
     e.preventDefault();
     InputValidate(elements, regex, msg);
   })

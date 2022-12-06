@@ -390,3 +390,78 @@ form input, form textarea {
     text-align: center;
 
 }
+
+#lightBox {
+    display: none;
+}
+
+#lightBox.active {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+     position: fixed;
+     top: 0;
+     width: 100%;
+     height: 100%;
+     background-color: #FAFAFA;
+    z-index: 30;
+}
+
+#lightBox .lightbox {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    height: 90%;
+
+}
+#lightBox .lightbox #exit-lightbox {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 70px;
+    color: #911C1C;
+    cursor: pointer;
+}
+
+#lightBox .lightbox div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    background-color: red;
+    height: 80%;
+}
+#lightBox .lightbox div #MediaLightbox {
+
+    width: 100%;
+    height: 100%;
+}
+
+#lightBox .lightbox div #MediaLightbox img,
+#lightBox .lightbox div #MediaLightbox video
+{
+    height: 100%;
+}
+
+#lightBox .lightbox div i{
+    font-size: 80px;
+    cursor: pointer;
+    color: #911C1C;
+}
+
+#lightBox .lightbox .lightbox-title {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-family: 'DM Sans', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 31px;
+    color: #911C1C;
+}

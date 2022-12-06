@@ -22,7 +22,7 @@ function photographerMediaFactory(data) {
 }
 // eslint-disable-next-line
 function MediaFactory(data) {
-    const name = '';
+    let datatype = '';
     const {
         date, id, photographerId, image, video, likes, title, price,
     } = data;
@@ -41,8 +41,10 @@ function MediaFactory(data) {
 
     if (data.video !== undefined) {
         mediaSupport = `<video src="${videoSrc}" type="video/mp4" aria-label="video ${title}"></video>`;
+        datatype = 'video';
     } else if (data.image !== undefined) {
         mediaSupport = `<img src="${picture}" alt="${title}">`;
+        datatype = 'img'
     }
 
 
@@ -50,13 +52,13 @@ function MediaFactory(data) {
         const Media = document.createElement('a');
         Media.setAttribute('id', id);
         Media.setAttribute('data-date', date);
-        Media.setAttribute('href', "#");
+        Media.setAttribute('href', `javascript:openLightBox(${id});`);
         Media.setAttribute('class', 'Media-card');
         Media.setAttribute('aria-label',  title+"closeup view");
         Media.setAttribute('tabindex', 0);
 
         Media.innerHTML = `
-                <div class="media" >
+                <div class="media" data-type="${datatype}">
                     ${mediaSupport}
                 </div>
                 <div class="titleAndLikes">

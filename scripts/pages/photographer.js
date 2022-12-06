@@ -66,12 +66,6 @@ async function fillSubBar() {
     let isLiked = false;
     let likes = parseInt(likesElements.textContent);
 
-
-    i.addEventListener('click', (e) => {
-      if (e.target.className === 'media-likes') return;
-      // openLightBox();
-    });
-
     function likeUtils (CalcLikes,CalcTotalLike,islike,iconsHeart) {
       likes = parseInt(CalcLikes)
       isLiked = islike
@@ -93,11 +87,61 @@ async function fillSubBar() {
   }
 }
 
-// function accessibility() {
-//
-// }
-// lightBox
+/**
+ * Ouvre la LightBox
+ * @param id number
+ */
 
+function openLightBox(id) {
+  const AllImage = document.querySelectorAll("#Media-Content .media")
+  const lightbox = document.querySelector('#lightBox')
+  const exit = document.querySelector('#exit-lightbox')
+  const media = document.querySelector('#MediaLightbox')
+  openLightBox();
+  function openLightBox() {
+    lightbox.classList.add('active');
+  }
+
+  function closeLightBox() {
+    lightbox.classList.remove('active');
+  }
+
+  exit.onclick = function (e) {
+    e.preventDefault()
+    closeLightBox();
+  }
+  exit.onkeydown = function (e) {
+    e.preventDefault()
+    if(e.key === "Enter") closeLightBox();
+  }
+  document.onkeydown = function (e) {
+    e.preventDefault()
+    if (e.key === "Escape") closeLightBox();
+  }
+
+  function fillLightBox(){
+    AllImage.forEach((el)=>{
+      const mediaArea = el.children[0];
+      if(el.getAttribute('data-type')!=='img'){
+        el.children[0].setAttribute('controls', "controls")
+        attributeMediaType(el.getAttribute('data-type'),mediaArea)
+      }else {
+        attributeMediaType(el.getAttribute('data-type'),mediaArea)
+      }
+      media.appendChild(mediaArea);
+    })
+  }
+
+  function attributeMediaType(mediatype,area) {
+    const type = document.createElement(mediatype);
+    const mediaSource = area.getAttribute('src');
+    const mediaAlt = area.getAttribute('alt');
+    type.setAttribute('src',mediaSource);
+    mediaAlt === 'video' ?  '': type.setAttribute('alt',mediaAlt);
+    return type;
+  }
+  fillLightBox();
+}
 
 
 init();

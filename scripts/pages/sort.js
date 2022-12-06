@@ -21,14 +21,20 @@ function OpenFilters() {
         }
     }
 
+    function close() {
+        if(selector.classList.contains('active') && cursor.classList.contains('rotate')) {
+            selector.classList.remove('active');
+            cursor.classList.remove('rotate');
+        }
+    }
+
     selector.onclick = function (){
         open();
     }
 
     selector.onkeydown = function (e) {
-        if(e.key === "Enter") {
-            open();
-        }
+        if(e.key === "Enter") open();
+        if(e.key === "Escape") close();
     }
 }
 
