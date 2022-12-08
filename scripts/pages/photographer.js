@@ -50,6 +50,7 @@ async function init() {
 }
 
 async function fillSubBar() {
+  //bug
   const domLikes = document.querySelector('#numberLikes');
   const domPhotographerPrice = document.querySelector('#price');
   const mediaContent = document.querySelectorAll('#Media-Content');
