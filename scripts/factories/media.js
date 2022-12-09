@@ -51,7 +51,7 @@ function MediaFactory(data) {
 
     function getMediaCardDOM() {
         const Media = document.createElement('article');
-        Media.setAttribute('id', id);
+        Media.setAttribute('id', `A${id}`);
         Media.setAttribute('data-date', date);
         Media.setAttribute('class', 'Media-card');
         Media.setAttribute('tabindex', '');
@@ -62,7 +62,7 @@ function MediaFactory(data) {
                 </a>
                 <div class="titleAndLikes">
                     <h3 class="media-title">${title}</h3>
-                    <p class="media-likes" aria-label="likes" tabindex="0" role="button" enterkeyhint="enter">${likes}<i class="fal fa-heart"></i></i></p>
+                    <p class="media-likes" aria-label="likes"  tabindex="0" role="button">${likes}<i class="fal fa-heart"></i></i></p>
                 </div>
            `;
         return (Media);

@@ -38,7 +38,7 @@ async function displayData(photographers, media) {
   });
 
   media.forEach((media) => {
-    const lightbox = document.querySelector('#lightBox')
+    likes()
     const mediaModel = MediaFactory(media);
     mediaSection.appendChild(mediaModel.getMediaCardDOM());
   });
@@ -62,10 +62,18 @@ async function fillSubBar() {
   domLikes.textContent = totalLikes.toLocaleString();
   domPhotographerPrice.textContent = `${photographersPrice[0].price}€ / jour`;
 
+}
+
+function likes(){
+
+  const mediaContent = document.querySelectorAll('#Media-Content');
+  const domLikes = document.querySelector('#numberLikes');
   for (const i of mediaContent[0].children) {
+
     const likesElements = i.children[1].lastElementChild;
     let isLiked = false;
     let likes = parseInt(likesElements.textContent);
+    let totalLikes = parseInt(domLikes.textContent);
 
     function likeUtils (CalcLikes,CalcTotalLike,islike,iconsHeart) {
       likes = parseInt(CalcLikes)
@@ -74,21 +82,22 @@ async function fillSubBar() {
       likesElements.innerHTML = `${likes} ` + iconsHeart;
     }
 
-     function like() {
-       return isLiked ? likeUtils(likes - 1, totalLikes -= 1, false, '<i class="fal fa-heart">') : likeUtils(likes + 1, totalLikes += 1, true, '<i class="fas fa-heart">')
-     }
+    function like() {
+      return isLiked ? likeUtils(likes - 1, totalLikes -= 1, false, '<i class="fal fa-heart">') : likeUtils(likes + 1, totalLikes += 1, true, '<i class="fas fa-heart">')
+    }
 
-    likesElements.addEventListener('click', ()=>{
+    likesElements.addEventListener('click', (e)=>{
+      e.preventDefault()
+      console.log('test')
       like()
     });
 
     likesElements.onkeydown = function (e) {
+      e.preventDefault()
       if(e.key ==='Enter') like()
     }
   }
 }
-
-
 
 
 function fillLightBox() {
@@ -186,6 +195,9 @@ function fillLightBox() {
 
 }
 
-
-init();
 fillSubBar();
+init();
+
+
+
+
