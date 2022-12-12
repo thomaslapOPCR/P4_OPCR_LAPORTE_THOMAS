@@ -8,6 +8,7 @@ main  {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
 }
 
 #contact_modal {
@@ -110,6 +111,7 @@ main  {
 
 #selectlist.active{
     height: auto;
+    z-index: 20;
 }
 
 #selectlist p{

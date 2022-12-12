@@ -15,6 +15,7 @@ function OpenFilters() {
             selector.children[3].setAttribute('tabindex', '');
         }
         if(selector.getAttribute('class') === 'active'){
+            selector.children[1].focus();
             selector.children[1].setAttribute('tabindex', '0');
             selector.children[2].setAttribute('tabindex', '0');
             selector.children[3].setAttribute('tabindex', '0');
@@ -33,8 +34,22 @@ function OpenFilters() {
     }
 
     selector.onkeydown = function (e) {
-        if(e.key === "Enter") open();
-        if(e.key === "Escape") close();
+        switch (e.key) {
+            case "Enter":{
+                e.preventDefault();
+                open();
+                break;
+            }
+            case "Escape" : {
+                close();
+                break;
+            }
+            // case "Tab" : {
+            //     nextFocus();
+            //     break;
+            // }
+
+        }
     }
 }
 

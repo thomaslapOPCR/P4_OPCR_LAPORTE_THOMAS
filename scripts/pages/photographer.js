@@ -38,7 +38,6 @@ async function displayData(photographers, media) {
   });
 
   media.forEach((media) => {
-    likes()
     const mediaModel = MediaFactory(media);
     mediaSection.appendChild(mediaModel.getMediaCardDOM());
   });
@@ -50,7 +49,6 @@ async function init() {
 }
 
 async function fillSubBar() {
-  //bug
   const domLikes = document.querySelector('#numberLikes');
   const domPhotographerPrice = document.querySelector('#price');
   const mediaContent = document.querySelectorAll('#Media-Content');
@@ -64,40 +62,43 @@ async function fillSubBar() {
 
 }
 
-function likes(){
 
-  const mediaContent = document.querySelectorAll('#Media-Content');
+
+function likes(el){
+
+
+  const likesElements = el.lastElementChild
+
+  let isLiked = likesElements.getAttribute('data-isLike')
   const domLikes = document.querySelector('#numberLikes');
-  for (const i of mediaContent[0].children) {
 
-    const likesElements = i.children[1].lastElementChild;
-    let isLiked = false;
     let likes = parseInt(likesElements.textContent);
     let totalLikes = parseInt(domLikes.textContent);
 
-    function likeUtils (CalcLikes,CalcTotalLike,islike,iconsHeart) {
+    function likeUtils (CalcLikes,CalcTotalLike,iconsHeart) {
       likes = parseInt(CalcLikes)
-      isLiked = islike
       domLikes.textContent = parseInt(CalcTotalLike).toLocaleString()
       likesElements.innerHTML = `${likes} ` + iconsHeart;
     }
 
-    function like() {
-      return isLiked ? likeUtils(likes - 1, totalLikes -= 1, false, '<i class="fal fa-heart">') : likeUtils(likes + 1, totalLikes += 1, true, '<i class="fas fa-heart">')
-    }
+     function like() {
 
-    likesElements.addEventListener('click', (e)=>{
-      e.preventDefault()
-      console.log('test')
-      like()
-    });
+      if(isLiked === "true") {
+        likesElements.setAttribute(`data-isLike`, false)
+        likeUtils(likes - 1,
+            totalLikes -= 1,
+            '<i class="fal fa-heart">')
+      }
 
-    likesElements.onkeydown = function (e) {
-      e.preventDefault()
-      if(e.key ==='Enter') like()
+      if(isLiked === "false") {
+        likesElements.setAttribute(`data-isLike`,true)
+        likeUtils(likes + 1, totalLikes += 1,  '<i class="fas fa-heart">')
     }
   }
+
+  return like();
 }
+
 
 
 function fillLightBox() {
@@ -112,6 +113,8 @@ function fillLightBox() {
   const ClonedAllImage = AllImage[counter].cloneNode();
   ClonedAllImage.controls = true;
 
+  setAriaHidden(document.querySelector('main'),false);
+  setAriaHidden(lightbox,true);
   lightbox.classList.add('active');
   lightbox.focus();
   media.appendChild(ClonedAllImage)
@@ -121,6 +124,8 @@ function fillLightBox() {
   function closeLightBox() {
     remove();
     lightbox.classList.remove('active');
+    setAriaHidden(document.querySelector('main'),true);
+    setAriaHidden(modal,false);
     counter = 0;
     if(AllImage[counter].classList.contains('video')) AllImage[counter].controls = false;
   }
@@ -195,9 +200,17 @@ function fillLightBox() {
 
 }
 
+/**
+ *
+ * @param element {HTMLElement}
+ * @param boolean
+ */
+function setAriaHidden(element,boolean){
+  return element.setAttribute('aria-hidden',boolean);
+}
+
 fillSubBar();
 init();
-
 
 
 

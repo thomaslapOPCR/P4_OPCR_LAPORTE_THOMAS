@@ -14,7 +14,7 @@
     <header>
 	    <a href="index.html" aria-label="lien vers la page d'accueil"><img src="assets/images/logo.png" class="logo" alt="Fisheye Home page"/></a>
     </header>
-    <main id="main">
+    <main id="main" aria-hidden="true">
       <section class="photograph-header"></section>
 <!-- 	    select liste pour le tri -->
 	  <section class="sort">
@@ -44,10 +44,10 @@
 		  </article>
 	  </section>
     </main>
-    <div id="contact_modal" aria-hidden="true" role=”dialog” aria-describedby="modalTitle" aria-modal="true" aria-label="closeup view">
+    <div id="contact_modal" aria-hidden="false" role=”dialog” aria-describedby="aria-desc" aria-modal="true" aria-label="closeup view">
 			<div class="modal">
 				<div class="header">
-					<div class="text-header">
+					<div class="text-header" id="aria-desc">
 						<h2>Contactez-moi</h2>
 						<h2 id="Photographer-name"></h2>
 					</div>
@@ -59,28 +59,28 @@
 				      method="get">
 					<div class="formData">
 						<label for="firstname">Prénom</label>
-						<input class="text-control" type="text" id="firstname"/>
+						<input class="text-control" type="text" id="firstname" aria-required="true"/>
 					</div>
 					
 					<div class="formData">
 						<label for="lastname">Nom</label>
-						<input  class="text-control"  type="text" id="lastname"/>
+						<input  class="text-control"  type="text" id="lastname"  aria-required="true"/>
 					</div>
 					
 					<div class="formData">
 						<label for="email">Email</label>
-						<input  class="text-control"  type="email" id="email"/>
+						<input  class="text-control"  type="email" id="email"  aria-required="true"/>
 					</div>
 					
 					<div class="formData">
 						<label for="message">Votre message</label>
-						<textarea  class="text-control"  id="message"></textarea>
+						<textarea  class="text-control"  id="message"  aria-required="true"></textarea>
 					</div>
 					<input type="submit" class="contact_button" id="submit" value="Envoyer">
 				</form>
 			</div>
 	</div>
-   <section id="lightBox" aria-hidden="true" role=”dialog” >
+   <section id="lightBox" aria-hidden="false" role=”dialog” >
 	  <section class="lightbox">
 		  <i id="exit-lightbox" role="button" tabindex="0" class="fal fa-times"></i>
 		  <div >
@@ -88,7 +88,7 @@
 			  <div id="MediaLightbox" tabindex="0"></div>
 			  <i role="button"  id="right" class="fas fa-chevron-right"  tabindex="0"></i>
 		  </div>
-		  <p class="lightbox-title">test</p>
+		  <p class="lightbox-title"></p>
 	  </section>
 	  
    </section>

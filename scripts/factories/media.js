@@ -54,15 +54,15 @@ function MediaFactory(data) {
         Media.setAttribute('id', `A${id}`);
         Media.setAttribute('data-date', date);
         Media.setAttribute('class', 'Media-card');
-        Media.setAttribute('tabindex', '');
+        Media.setAttribute('tabindex', '0');
 
         Media.innerHTML = `
-                <a href="javascript:fillLightBox();"  aria-label="${title + "closeup view"}" tabindex="0">
+                <a href="javascript:fillLightBox();"  aria-label="${title + "closeup view"}">
                     ${mediaSupport}
                 </a>
-                <div class="titleAndLikes">
+                <div class="titleAndLikes" onclick="likes(this)" onkeydown="this.onkeydown =  (e) => {if(e.key ==='Enter') likes(this)}">
                     <h3 class="media-title">${title}</h3>
-                    <p class="media-likes" aria-label="likes"  tabindex="0" role="button">${likes}<i class="fal fa-heart"></i></i></p>
+                    <p class="media-likes" aria-label="likes"  tabindex="0" role="button" data-isLike="false">${likes}<i class="fal fa-heart"></i></i></p>
                 </div>
            `;
         return (Media);

@@ -10,8 +10,11 @@ async function fillName() {
 function displayModal() {
   const modal = document.getElementById('contact_modal');
   fillName();
+  setAriaHidden(document.querySelector('main'),false);
+  setAriaHidden(modal,true);
   modal.style.display = 'block';
   document.querySelector('#firstname').focus()
+  document.querySelector('body').style.overflowY = 'hidden';
 }
 // eslint-disable-next-line
 function closeModal() {
@@ -24,25 +27,29 @@ function closeModal() {
   const lastname = document.querySelector('#lastname');
   const email = document.querySelector('#email');
   const message = document.querySelector('#message');
-  exit.onclick = function () {
+
+  function close() {
     modal.style.display = 'none';
     resetForm([firstname,lastname,email,message])
+    form.reset();
+    document.querySelector('body').style.overflowY = 'scroll';
+    setAriaHidden(document.querySelector('main'),true);
+    setAriaHidden(modal,false);
+  }
+  exit.onclick = function () {
+    close();
   }
 
   exit.onkeydown = function (event) {
     if (event.key === "Enter") {
       event.preventDefault();
-      modal.style.display = 'none';
-      resetForm([firstname,lastname,email,message])
-      form.reset();
+      close();
     }
   }
   document.onkeydown = function (event) {
     if (event.key === "Escape") {
       event.preventDefault();
-      modal.style.display = 'none';
-      resetForm([firstname,lastname,email,message])
-      form.reset();
+      close();
     }
   }
 }
@@ -59,7 +66,7 @@ function submitForm(){
   change(firstname,regGen,'Veuillez entrer 5 caractères ou plus pour le champ du prénom');
   change(lastname,regGen,'Veuillez entrer 5 caractères ou plus pour le champ du nom');
   change(email,regEmail,'Veuillez entrer un email valide pour ce champ.');
-  change(message,regGen,'Veuillez entrer 5 caractères ou plus pour le champ du message');
+  change(message,undefined,'');
 
   if(checkValidity(firstname.parentElement) === "true" &&
       checkValidity(lastname.parentElement) === "true"  &&
@@ -82,12 +89,24 @@ function submitForm(){
 
 function change(elements,regex,msg){
   const form = document.querySelector('#form')
+
+  function MessageVerify(){
+    if(elements.id ==='message') {
+      if(elements.value.trim().length <10){
+        asginErrorOrValidity(elements.parentElement, false, 'Vous devez avoir 10 caractères minimum ', true, false);
+      } else {
+        asginErrorOrValidity(elements.parentElement, true, '', false, true);
+      }
+    }
+  }
   elements.oninput = (e) => {
     e.preventDefault();
+    MessageVerify();
     InputValidate(elements, regex, msg);
   };
   form.addEventListener('submit', (e)=>{
     e.preventDefault();
+    MessageVerify();
     InputValidate(elements, regex, msg);
   })
 
@@ -105,8 +124,9 @@ function asginErrorOrValidity(Elements, dataValid, message, errVisible, validVis
 }
 
 function InputValidate(elements, regex, message) {
-  const checkValidValue = regex.test(elements.value);
   if (regex === null) return;
+  if (regex === undefined) return 'le test ne doit pas être effectuer'
+  const checkValidValue = regex.test(elements.value);
 
   if (checkValidValue) {
     asginErrorOrValidity(elements.parentElement, true, '', false, true);

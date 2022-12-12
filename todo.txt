@@ -1,15 +1,32 @@
-•	Formulaire
-o	fermeture pouvoir utiliser le bouton entrer sur la croix  | ✅
-o	Les nom et prénom ne doivent pas autorisés des caractères spéciaux | ✅
-o	Mettre un minimum de plus de 2 caractères pour message | ✅
-o	Quand on ferme le formulaire, faire un RAZ des inputs  | ✅
-o	Prochaine session, faire une vérification sur l'accessibilité du formulaire  | ⚠
-•	Tri  | ✅
-•	Commencer la lightbox
+•	Modal Contact
+    o	Formulaire
+        	Mettre un minimum de plus de 2 caractères pour message => retirer la regex  | ✅
 
+    o	Accessibilité
+        	aria-hidden à faux pour la modal et à vrai pour la main   | ✅
+        	quand on ferme la modal, aria-hidden à vrai pour la modal et à faux pour la main   | ✅
+        	empêcher le scroll de la main quand la modal est ouverte   | ✅
 
+•	Tri
+    o	Selectbox pouvoir utiliser les flèches pour se déplacer
+
+•	Modal lightbox
+    o	Accessibilité   | ✅
+
+	faire comme pour la modal contact
+    o	utiliser la média factory
+    o	quand je clique sur la troisième image, ma lightbox  affiche cette image
+    o	Btn Précédent inactif si premier media (à voir)
+    o	Btn Suivant inactif si dernier media (à voir)
+
+•	Faire le responsive pour la version tablette
+•	Vérifier si le site n'a pas de problèmes d’accessibilité  avec
+    o	Achecker
+    o	Wave
+    o	Une liseuse
+•	Vérifier le code avec Eslint
 \\\\\\\\\\\\\\\\ QUESTION \\\\\\\\\\\\\\\\\\\\\\
-aria-pressed="false" sur le role="bouton"
+
 
 
 -------------------
