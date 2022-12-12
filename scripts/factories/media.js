@@ -20,6 +20,7 @@ function photographerMediaFactory(data) {
     }
     return { getUserCardDOM };
 }
+
 // eslint-disable-next-line
 function MediaFactory(data) {
     const {
@@ -36,8 +37,6 @@ function MediaFactory(data) {
     //     mediaSupport = `<img src="asset/images/InvalidImage.png" alt="Image invalide ${title}">`;
     // }
     //
-
-
     if (data.video !== undefined) {
         datatype = 'video';
         mediaSupport = `<video id="M${id}" class="media ${datatype}" src="${videoSrc}" type="video" aria-label="video ${title}"></video>`;
@@ -57,9 +56,9 @@ function MediaFactory(data) {
         Media.setAttribute('tabindex', '0');
 
         Media.innerHTML = `
-                <a href="javascript:fillLightBox();"  aria-label="${title + "closeup view"}">
+                <article role="button" aria-label="${title + "closeup view"}">
                     ${mediaSupport}
-                </a>
+                </article>
                 <div class="titleAndLikes" onclick="likes(this)" onkeydown="this.onkeydown =  (e) => {if(e.key ==='Enter') likes(this)}">
                     <h3 class="media-title">${title}</h3>
                     <p class="media-likes" aria-label="likes"  tabindex="0" role="button" data-isLike="false">${likes}<i class="fal fa-heart"></i></i></p>

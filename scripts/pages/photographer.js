@@ -44,7 +44,6 @@ async function displayData(photographers, media) {
 }
 
 async function init() {
-
   await displayData(await getPhotographers(), await asingSort());
 }
 
@@ -62,10 +61,7 @@ async function fillSubBar() {
 
 }
 
-
-
 function likes(el){
-
 
   const likesElements = el.lastElementChild
 
@@ -101,33 +97,36 @@ function likes(el){
 
 
 
-function fillLightBox() {
+async function fillLightBox() {
 
-  const AllImage = document.querySelectorAll("#Media-Content .Media-card .media")
+
   const lightbox = document.querySelector('#lightBox')
   const exit = document.querySelector('#exit-lightbox')
   const media = document.querySelector('#MediaLightbox')
   const leftArrow = document.querySelector('#left')
   const rightArrow = document.querySelector('#right')
+
+
+
+
+
+
   let counter = 0;
-  const ClonedAllImage = AllImage[counter].cloneNode();
-  ClonedAllImage.controls = true;
+  const image = await getMedia();
 
   setAriaHidden(document.querySelector('main'),false);
   setAriaHidden(lightbox,true);
+
+
   lightbox.classList.add('active');
   lightbox.focus();
-  media.appendChild(ClonedAllImage)
-  ClonedAllImage.classList.add('active')
+
 
 
   function closeLightBox() {
-    remove();
     lightbox.classList.remove('active');
     setAriaHidden(document.querySelector('main'),true);
-    setAriaHidden(modal,false);
-    counter = 0;
-    if(AllImage[counter].classList.contains('video')) AllImage[counter].controls = false;
+    setAriaHidden(lightbox,false);
   }
 
   exit.onclick = function (e) {
@@ -142,9 +141,10 @@ function fillLightBox() {
 
   document.onkeydown = function (e) {
     if (e.key === "Escape") closeLightBox();
-    if(e.key === "ArrowLeft") left();
-    if(e.key === "ArrowRight") right()
+    // if(e.key === "ArrowLeft") left();
+    // if(e.key === "ArrowRight") right()
   }
+
   leftArrow.onkeydown = function (e) {
     e.preventDefault()
     if(e.key === "Enter") left();
@@ -166,38 +166,15 @@ function fillLightBox() {
   })
 
 
-
-
   function left(){
-    AllImage[counter].classList.remove('active')
-    media.innerHTML = ''
-    counter--
-    if (counter < 0) {
-      counter = AllImage.length-1;
-    }
 
-    AllImage[counter].classList.add('active')
-    if(AllImage[counter].classList.contains('video')) AllImage[counter].controls = true;
-    media.appendChild(AllImage[counter].cloneNode())
+
   }
 
-  function right(){
+  function right() {
 
-    AllImage[counter].classList.remove('active')
-    media.innerHTML = ''
-    counter++
-    if (counter >= AllImage.length-1) {
-      counter = 0;
-    }
-    AllImage[counter].classList.add('active')
-    if(AllImage[counter].classList.contains('video')) AllImage[counter].controls = true;
-    media.appendChild(AllImage[counter].cloneNode())
+
   }
-
-  function remove(){
-    while( media.firstChild) media.removeChild( media.firstChild)
-  }
-
 }
 
 /**
@@ -209,8 +186,11 @@ function setAriaHidden(element,boolean){
   return element.setAttribute('aria-hidden',boolean);
 }
 
+
+fillLightBox();
 fillSubBar();
 init();
+
 
 
 

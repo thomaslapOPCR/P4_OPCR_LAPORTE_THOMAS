@@ -8,7 +8,7 @@
         	empêcher le scroll de la main quand la modal est ouverte   | ✅
 
 •	Tri
-    o	Selectbox pouvoir utiliser les flèches pour se déplacer
+    o	Selectbox pouvoir utiliser les flèches pour se déplacer  | ❌
 
 •	Modal lightbox
     o	Accessibilité   | ✅
