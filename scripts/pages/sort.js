@@ -44,10 +44,10 @@ function OpenFilters() {
                 close();
                 break;
             }
-            // case "Tab" : {
-            //     nextFocus();
-            //     break;
-            // }
+            case "ArrowDown" : {
+
+                break;
+            }
 
         }
     }

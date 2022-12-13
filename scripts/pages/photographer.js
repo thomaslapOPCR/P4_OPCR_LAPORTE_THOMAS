@@ -28,10 +28,11 @@ async function getPhotographers() {
   return data.photographers.filter((el) => el.id.toString() === getId());
 }
 
-async function displayData(photographers, media) {
+async function displayData(photographers, media, lightbox) {
   const photographersSection = document.querySelector('.photograph-header');
   const mediaSection = document.querySelector('#Media-Content');
-  const lightbox = document.querySelector('#lightBox')
+  const lightBoxSection = document.querySelector('#lightBox');
+
   photographers.forEach((photographer) => {
     const photographerModel = photographerMediaFactory(photographer);
     photographersSection.innerHTML = photographerModel.getUserCardDOM();
@@ -41,16 +42,21 @@ async function displayData(photographers, media) {
     const mediaModel = MediaFactory(media);
     mediaSection.appendChild(mediaModel.getMediaCardDOM());
   });
+
+  lightbox.forEach((lightbox) => {
+
+    const lightboxModel = MediaFactory(lightbox);
+    lightBoxSection.appendChild(lightboxModel.getMediaLightBoxCardDOM())
+  });
 }
 
 async function init() {
-  await displayData(await getPhotographers(), await asingSort());
+  await displayData(await getPhotographers(), await asingSort(),await asingSort());
 }
 
 async function fillSubBar() {
   const domLikes = document.querySelector('#numberLikes');
   const domPhotographerPrice = document.querySelector('#price');
-  const mediaContent = document.querySelectorAll('#Media-Content');
   const photographersPrice = await getPhotographers();
   const numberOfLikes = await getMedia();
   let totalLikes = 0;
@@ -97,84 +103,97 @@ function likes(el){
 
 
 
-async function fillLightBox() {
-
-
+async function fillLightBox(Element) {
+  const items = Element.parentNode;
   const lightbox = document.querySelector('#lightBox')
-  const exit = document.querySelector('#exit-lightbox')
-  const media = document.querySelector('#MediaLightbox')
-  const leftArrow = document.querySelector('#left')
-  const rightArrow = document.querySelector('#right')
+  const target = document.querySelector(`.${items.id}`)
+
+
+  const exit = target.firstElementChild;
+
+
+  const g = lightbox.children;
+
+  target.classList.add('active');
+
+
+  t();
+  function t(){
+    for (let i = 0; i < g.length; i++) {
+
+      const leftArrow = g[i].children[1].children[0];
+      const rightArrow = g[i].children[1].children[2];
+      const exit = g[i].firstElementChild;
+
+      exit.onclick = function (e) {
+        e.preventDefault()
+        closeLightBox(g[i]);
+      }
+
+      exit.onkeydown = function (e) {
+        e.preventDefault()
+        if(e.key === "Enter") closeLightBox(g[i]);
+      }
+
+      document.onkeydown = function (e) {
+        if (e.key === "Escape") closeLightBox(g[i]);
+        // if(e.key === "ArrowLeft") left(i,g[i],g.length);
+        // if(e.key === "ArrowRight") right(i,g[i],g.length)
+      }
+      // leftArrow.onkeydown = function (e) {
+      //   e.preventDefault()
+      //   if(e.key === "Enter") left(i,g[i],g.length);
+      // }
+      //
+      // rightArrow.onkeydown = function (e) {
+      //   e.preventDefault()
+      //   if(e.key === "Enter") right(i,g[i],g.length);
+      // }
 
 
 
+        leftArrow.addEventListener('click',(e)=>{
+
+          e.preventDefault();
+
+          g[i].classList.remove('active')
+          i--;
+          g[i].classList.add('active');
+          if(g[i]<=0) i=1;
+
+        })
+
+        rightArrow.addEventListener('click',(e)=>{
+
+          e.preventDefault();
+          g[i].classList.remove('active')
+          i++;
+          g[i].classList.add('active');
+          if(g[i]>= g.length) i=1;
+
+        })
+
+    }
 
 
-
-  let counter = 0;
-  const image = await getMedia();
+  }
+  open();
 
   setAriaHidden(document.querySelector('main'),false);
   setAriaHidden(lightbox,true);
 
+  function open(){
+    lightbox.classList.add('active');
+    lightbox.focus();
+  }
 
-  lightbox.classList.add('active');
-  lightbox.focus();
-
-
-
-  function closeLightBox() {
+  function closeLightBox(i) {
     lightbox.classList.remove('active');
+    i.classList.remove('active');
     setAriaHidden(document.querySelector('main'),true);
     setAriaHidden(lightbox,false);
   }
 
-  exit.onclick = function (e) {
-    e.preventDefault()
-    closeLightBox();
-  }
-
-  exit.onkeydown = function (e) {
-    e.preventDefault()
-    if(e.key === "Enter") closeLightBox();
-  }
-
-  document.onkeydown = function (e) {
-    if (e.key === "Escape") closeLightBox();
-    // if(e.key === "ArrowLeft") left();
-    // if(e.key === "ArrowRight") right()
-  }
-
-  leftArrow.onkeydown = function (e) {
-    e.preventDefault()
-    if(e.key === "Enter") left();
-  }
-
-  rightArrow.onkeydown = function (e) {
-    e.preventDefault()
-    if(e.key === "Enter") left();
-  }
-
-  leftArrow.addEventListener('click',(e)=>{
-    e.preventDefault();
-    left();
-  })
-
-  rightArrow.addEventListener('click',(e)=>{
-    e.preventDefault();
-    right()
-  })
-
-
-  function left(){
-
-
-  }
-
-  function right() {
-
-
-  }
 }
 
 /**
@@ -187,10 +206,8 @@ function setAriaHidden(element,boolean){
 }
 
 
-fillLightBox();
+
 fillSubBar();
 init();
-
-
 
 

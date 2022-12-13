@@ -226,14 +226,14 @@ main  {
     transition: transform .3s;
 }
 
-#Media-Content .media {
+#Media-Content article .media {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-#Media-Content .media img ,
-#Media-Content .media video
+#Media-Content article .media img ,
+#Media-Content article .media video
 {
     width: 100%;
     height: 100%;
@@ -414,8 +414,11 @@ form input, form textarea {
      background-color: #FAFAFA;
 
 }
-
 #lightBox .lightbox {
+    display: none;
+}
+
+#lightBox .lightbox.active{
     position: relative;
     display: flex;
     flex-direction: row;
@@ -425,7 +428,7 @@ form input, form textarea {
     height: 90%;
 
 }
-#lightBox .lightbox #exit-lightbox {
+#lightBox .lightbox .exit-lightbox {
     position: absolute;
     top: 20px;
     right: 20px;
@@ -447,14 +450,9 @@ form input, form textarea {
     width: 100%;
     height: 100%;
 }
+
 #lightBox .lightbox div #MediaLightbox img,
 #lightBox .lightbox div #MediaLightbox video
-{
-   display: none;
-}
-
-#lightBox .lightbox div #MediaLightbox img.active,
-#lightBox .lightbox div #MediaLightbox video.active
 {
     display: block;
     height: 100%;
@@ -476,4 +474,16 @@ form input, form textarea {
     font-size: 24px;
     line-height: 31px;
     color: #911C1C;
+}
+
+@media screen and (max-width: 1000px  ) {
+    .photograph-header{
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        flex-direction: column;
+        gap: 30px;
+        width: 70%;
+        height: auto;
+    }
 }

@@ -54,11 +54,11 @@ function MediaFactory(data) {
         Media.setAttribute('data-date', date);
         Media.setAttribute('class', 'Media-card');
         Media.setAttribute('tabindex', '0');
-
+        //href="javascript:fillLightBox()"
         Media.innerHTML = `
-                <article role="button" aria-label="${title + "closeup view"}">
+                <a href="javascript:void(0)" onclick="fillLightBox(this)" role="button" aria-label="${title + "closeup view"}">
                     ${mediaSupport}
-                </article>
+                </a>
                 <div class="titleAndLikes" onclick="likes(this)" onkeydown="this.onkeydown =  (e) => {if(e.key ==='Enter') likes(this)}">
                     <h3 class="media-title">${title}</h3>
                     <p class="media-likes" aria-label="likes"  tabindex="0" role="button" data-isLike="false">${likes}<i class="fal fa-heart"></i></i></p>
@@ -67,5 +67,25 @@ function MediaFactory(data) {
         return (Media);
     }
 
-    return { getMediaCardDOM };
+    function getMediaLightBoxCardDOM() {
+        const lightboxSection = document.createElement('section');
+        lightboxSection.setAttribute('class', 'lightbox '+`A${id}` );
+
+         lightboxSection.innerHTML = `
+             <i role="button" tabindex="0" class="fal fa-times exit-lightbox"></i>
+                 <div >
+                     <i role="button"  class="fas fa-chevron-left left"  tabindex="0"></i>
+                     <div id="MediaLightbox" tabindex="0">
+                        ${mediaSupport}
+                    </div>
+                     <i role="button"  class="fas fa-chevron-right right"  tabindex="0"></i>
+                 </div>
+             <p class="lightbox-title">${title}</p>`;
+
+        return (lightboxSection)
+    }
+
+    return { getMediaCardDOM , getMediaLightBoxCardDOM};
 }
+
+
