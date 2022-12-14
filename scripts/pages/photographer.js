@@ -28,7 +28,7 @@ async function getPhotographers() {
   return data.photographers.filter((el) => el.id.toString() === getId());
 }
 
-async function displayData(photographers, media, lightbox) {
+async function displayData(photographers, media) {
   const photographersSection = document.querySelector('.photograph-header');
   const mediaSection = document.querySelector('#Media-Content');
   const lightBoxSection = document.querySelector('#lightBox');
@@ -38,20 +38,19 @@ async function displayData(photographers, media, lightbox) {
     photographersSection.innerHTML = photographerModel.getUserCardDOM();
   });
 
-  media.forEach((media) => {
-    const mediaModel = MediaFactory(media);
+  media.forEach((media,index) => {
+    const mediaModel = MediaFactory(media,index);
     mediaSection.appendChild(mediaModel.getMediaCardDOM());
   });
 
-  lightbox.forEach((lightbox) => {
-
-    const lightboxModel = MediaFactory(lightbox);
-    lightBoxSection.appendChild(lightboxModel.getMediaLightBoxCardDOM())
-  });
+  // lightbox.forEach((lightbox) => {
+  //   const lightboxModel = MediaFactory(lightbox);
+  //   lightBoxSection.appendChild(lightboxModel.getMediaLightBoxCardDOM())
+  // });
 }
 
 async function init() {
-  await displayData(await getPhotographers(), await asingSort(),await asingSort());
+  await displayData(await getPhotographers(), await asingSort());
 }
 
 async function fillSubBar() {
@@ -103,96 +102,106 @@ function likes(el){
 
 
 
-async function fillLightBox(Element) {
-  const items = Element.parentNode;
+async function fillLightBox() {
+  //refaire ici
+  //faire quelque tests
+  const mediaSection = document.querySelector('#Media-Content');
+  const lightboxSection = document.querySelector('#MediaLightbox');
+  const exit = document.querySelector('#exit-lightbox');
   const lightbox = document.querySelector('#lightBox')
-  const target = document.querySelector(`.${items.id}`)
 
+  mediaSection.addEventListener('click',async (e) => {
+    if (e.target.parentElement.classList.contains('lightboxSection')) {
+      open();
+      let index = e.target.parentElement.parentElement.getAttribute('data-index');
 
-  const exit = target.firstElementChild;
+     let media = await asingSort();
 
+        const mediaModel = MediaFactory(media[index]);
+        lightboxSection.innerHTML = (mediaModel.getMediaLightBoxCardDOM());
 
-  const g = lightbox.children;
-
-  target.classList.add('active');
-
-
-  t();
-  function t(){
-    for (let i = 0; i < g.length; i++) {
-
-      const leftArrow = g[i].children[1].children[0];
-      const rightArrow = g[i].children[1].children[2];
-      const exit = g[i].firstElementChild;
-
-      exit.onclick = function (e) {
-        e.preventDefault()
-        closeLightBox(g[i]);
-      }
-
-      exit.onkeydown = function (e) {
-        e.preventDefault()
-        if(e.key === "Enter") closeLightBox(g[i]);
-      }
-
-      document.onkeydown = function (e) {
-        if (e.key === "Escape") closeLightBox(g[i]);
-        // if(e.key === "ArrowLeft") left(i,g[i],g.length);
-        // if(e.key === "ArrowRight") right(i,g[i],g.length)
-      }
-      // leftArrow.onkeydown = function (e) {
-      //   e.preventDefault()
-      //   if(e.key === "Enter") left(i,g[i],g.length);
-      // }
-      //
-      // rightArrow.onkeydown = function (e) {
-      //   e.preventDefault()
-      //   if(e.key === "Enter") right(i,g[i],g.length);
-      // }
-
-
-
-        leftArrow.addEventListener('click',(e)=>{
-
-          e.preventDefault();
-
-          g[i].classList.remove('active')
-          i--;
-          g[i].classList.add('active');
-          if(g[i]<=0) i=1;
-
-        })
-
-        rightArrow.addEventListener('click',(e)=>{
-
-          e.preventDefault();
-          g[i].classList.remove('active')
-          i++;
-          g[i].classList.add('active');
-          if(g[i]>= g.length) i=1;
-
-        })
 
     }
+  })
+      exit.onclick = function (e) {
+        e.preventDefault()
+        closeLightBox();
+      }
+      function closeLightBox() {
+        lightbox.classList.remove('active');
+        setAriaHidden(document.querySelector('main'), true);
+        setAriaHidden(lightbox, false);
+      }
+
+      //
+      // const exit = target.firstElementChild;
+      //
+      //
+      // const g = lightbox.children;
+      //
+      // target.classList.add('active');
+      //
+      //
+      // t();
+      // function t(){
+      //   for (let i = 0; i < g.length; i++) {
+      //   //indexOf
+      //
+      //     const leftArrow = g[i].children[1].children[0];
+      //     const rightArrow = g[i].children[1].children[2];
+      //     const exit = g[i].firstElementChild;
+      //
+
+      //
+      //     exit.onkeydown = function (e) {
+      //       e.preventDefault()
+      //       if(e.key === "Enter") closeLightBox(g[i]);
+      //     }
+      //
+
+      //     // leftArrow.onkeydown = function (e) {
+      //     //   e.preventDefault()
+      //     //   if(e.key === "Enter") left(i,g[i],g.length);
+      //     // }
+      //     //
+      //     // rightArrow.onkeydown = function (e) {
+      //     //   e.preventDefault()
+      //     //   if(e.key === "Enter") right(i,g[i],g.length);
+      //     // }
+      //
+      //
+      //
+      //       leftArrow.addEventListener('click',(e)=>{
+      //         e.preventDefault();
+      //         g[i].classList.remove('active')
+      //         i--;
+      //         g[i].classList.add('active');
+      //         if(g[i]<=0) i=1;
+      //       })
+      //
+      //       rightArrow.addEventListener('click',(e)=>{
+      //         e.preventDefault();
+      //         g[i].classList.remove('active')
+      //         i++;
+      //         g[i].classList.add('active');
+      //         if(g[i]>= g.length) i=1;
+      //       })
+      //
+      //   }
+      //
+      //
+      // }
+      // //
+      //
+      // setAriaHidden(document.querySelector('main'),false);
+      // setAriaHidden(lightbox,true);
+      //
+      function open() {
+        lightbox.classList.add('active');
+        lightbox.focus();
+      }
 
 
-  }
-  open();
-
-  setAriaHidden(document.querySelector('main'),false);
-  setAriaHidden(lightbox,true);
-
-  function open(){
-    lightbox.classList.add('active');
-    lightbox.focus();
-  }
-
-  function closeLightBox(i) {
-    lightbox.classList.remove('active');
-    i.classList.remove('active');
-    setAriaHidden(document.querySelector('main'),true);
-    setAriaHidden(lightbox,false);
-  }
 
 }
 
@@ -209,5 +218,5 @@ function setAriaHidden(element,boolean){
 
 fillSubBar();
 init();
-
+fillLightBox();
 

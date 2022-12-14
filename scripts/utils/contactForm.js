@@ -36,6 +36,7 @@ function closeModal() {
     setAriaHidden(document.querySelector('main'),true);
     setAriaHidden(modal,false);
   }
+
   exit.onclick = function () {
     close();
   }
@@ -46,12 +47,13 @@ function closeModal() {
       close();
     }
   }
-  document.onkeydown = function (event) {
-    if (event.key === "Escape") {
-      event.preventDefault();
-      close();
+
+    document.onkeydown = function (event) {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        close();
+      }
     }
-  }
 }
 
 function submitForm(){

@@ -412,13 +412,9 @@ form input, form textarea {
      width: 100%;
      height: 100%;
      background-color: #FAFAFA;
-
-}
-#lightBox .lightbox {
-    display: none;
 }
 
-#lightBox .lightbox.active{
+#lightBox .lightbox{
     position: relative;
     display: flex;
     flex-direction: row;
@@ -426,9 +422,8 @@ form input, form textarea {
     align-items: center;
     width: 70%;
     height: 90%;
-
 }
-#lightBox .lightbox .exit-lightbox {
+#lightBox .lightbox #exit-lightbox {
     position: absolute;
     top: 20px;
     right: 20px;
@@ -476,7 +471,7 @@ form input, form textarea {
     color: #911C1C;
 }
 
-@media screen and (max-width: 1000px  ) {
+@media screen and (max-width: 1000px ) {
     .photograph-header{
         display: flex;
         align-items: flex-start;

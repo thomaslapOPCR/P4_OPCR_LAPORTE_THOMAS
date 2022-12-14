@@ -22,10 +22,11 @@ function photographerMediaFactory(data) {
 }
 
 // eslint-disable-next-line
-function MediaFactory(data) {
+function MediaFactory(data,index) {
     const {
         date, id, photographerId, image, video, likes, title, price,
     } = data;
+
 
     const picture = `assets/photos/${photographerId}/${image}`;
     const videoSrc = `assets/photos/${photographerId}/${video}`;
@@ -49,14 +50,16 @@ function MediaFactory(data) {
 
 
     function getMediaCardDOM() {
+
         const Media = document.createElement('article');
         Media.setAttribute('id', `A${id}`);
         Media.setAttribute('data-date', date);
+        Media.setAttribute('data-index', index);
         Media.setAttribute('class', 'Media-card');
         Media.setAttribute('tabindex', '0');
         //href="javascript:fillLightBox()"
         Media.innerHTML = `
-                <a href="javascript:void(0)" onclick="fillLightBox(this)" role="button" aria-label="${title + "closeup view"}">
+                <a href="javascript:void(0)" class="lightboxSection" role="button" aria-label="${title + "closeup view"}">
                     ${mediaSupport}
                 </a>
                 <div class="titleAndLikes" onclick="likes(this)" onkeydown="this.onkeydown =  (e) => {if(e.key ==='Enter') likes(this)}">
@@ -68,21 +71,7 @@ function MediaFactory(data) {
     }
 
     function getMediaLightBoxCardDOM() {
-        const lightboxSection = document.createElement('section');
-        lightboxSection.setAttribute('class', 'lightbox '+`A${id}` );
-
-         lightboxSection.innerHTML = `
-             <i role="button" tabindex="0" class="fal fa-times exit-lightbox"></i>
-                 <div >
-                     <i role="button"  class="fas fa-chevron-left left"  tabindex="0"></i>
-                     <div id="MediaLightbox" tabindex="0">
-                        ${mediaSupport}
-                    </div>
-                     <i role="button"  class="fas fa-chevron-right right"  tabindex="0"></i>
-                 </div>
-             <p class="lightbox-title">${title}</p>`;
-
-        return (lightboxSection)
+        return (mediaSupport);
     }
 
     return { getMediaCardDOM , getMediaLightBoxCardDOM};
