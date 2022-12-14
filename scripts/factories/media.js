@@ -71,6 +71,7 @@ function MediaFactory(data,index) {
     }
 
     function getMediaLightBoxCardDOM() {
+
         return (mediaSupport);
     }
 

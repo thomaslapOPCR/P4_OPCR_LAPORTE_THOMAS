@@ -451,13 +451,31 @@ form input, form textarea {
 {
     display: block;
     height: 100%;
+    width: 100%;
+    object-fit: cover;
 }
 
 #lightBox .lightbox div i{
     font-size: 80px;
     cursor: pointer;
+    pointer-events: visible;
     color: #911C1C;
 }
+
+#lightBox .lightbox div #left.dis{
+    pointer-events: none;
+    cursor: none;
+    opacity: 0;
+    transition: .4s;
+}
+
+#lightBox .lightbox div #right.dis{
+    pointer-events: none;
+    cursor: none;
+    opacity: 0;
+    transition: .4s;
+}
+
 
 #lightBox .lightbox .lightbox-title {
     position: absolute;

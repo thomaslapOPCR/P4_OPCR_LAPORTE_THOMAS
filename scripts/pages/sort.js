@@ -91,12 +91,14 @@ async function asingSort(element){
            await remove();
             const media = data.sort((a, b) => b.likes - a.likes)
             displayData(await getPhotographers(),await media);
+            fillLightBox( await media);
             break;
         }
         case "Date":{
             await remove();
             const media = data.sort((a, b) => b.date - a.date)
             displayData(await getPhotographers(),await media);
+            fillLightBox( await media);
               break;
         }
 
@@ -112,10 +114,13 @@ async function asingSort(element){
                 return 0
             })
             displayData(await getPhotographers(),await media);
+            fillLightBox( await media);
             break;
         }
         default:{
-            return data.sort((a, b) => b.likes - a.likes)
+            const media = data.sort((a, b) => b.likes - a.likes)
+            fillLightBox(await media)
+            return media
         }
     }
 }

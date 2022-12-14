@@ -51,6 +51,7 @@ async function displayData(photographers, media) {
 
 async function init() {
   await displayData(await getPhotographers(), await asingSort());
+
 }
 
 async function fillSubBar() {
@@ -102,24 +103,97 @@ function likes(el){
 
 
 
-async function fillLightBox() {
+async function fillLightBox(data) {
   //refaire ici
   //faire quelque tests
   const mediaSection = document.querySelector('#Media-Content');
   const lightboxSection = document.querySelector('#MediaLightbox');
   const exit = document.querySelector('#exit-lightbox');
-  const lightbox = document.querySelector('#lightBox')
+  const lightbox = document.querySelector('#lightBox');
+  const leftArrow = document.querySelector('#left');
+  const rightArrow =document.querySelector('#right');
+  const mediaTitle = document.querySelector('#LightBoxTitle');
 
   mediaSection.addEventListener('click',async (e) => {
     if (e.target.parentElement.classList.contains('lightboxSection')) {
-      open();
-      let index = e.target.parentElement.parentElement.getAttribute('data-index');
 
-     let media = await asingSort();
+      open();
+      let index = parseInt(e.target.parentElement.parentElement.getAttribute('data-index'));
+
+      let media = data;
+
+
+      function FillLightBox(index){
+        if(index === 0) {
+          leftArrow.classList.add('dis')
+
+        }else {leftArrow.classList.remove('dis')}
+
+        if(index === (media.length-1)) {
+          rightArrow.classList.add('dis')
+
+        } else {rightArrow.classList.remove('dis')}
 
         const mediaModel = MediaFactory(media[index]);
+
+        mediaTitle.innerHTML ='';
+        mediaTitle.innerHTML = media[index].title;
+        lightboxSection.innerHTML = '';
         lightboxSection.innerHTML = (mediaModel.getMediaLightBoxCardDOM());
 
+        if(lightboxSection.children[0].getAttribute('type') ==='video') lightboxSection.children[0].setAttribute('controls','');
+      }
+
+      FillLightBox(index);
+
+      if(document.querySelector('#lightBox').classList.contains('active')) {
+
+        leftArrow.addEventListener('click',(e)=>{
+          e.preventDefault();
+          index--;
+          FillLightBox(index)
+        })
+
+        rightArrow.addEventListener('click',(e)=>{
+          e.preventDefault();
+          index++;
+          FillLightBox(index)
+        })
+
+        leftArrow.addEventListener('keydown',(e)=>{
+          if(e.key === 'Enter'){
+
+            e.preventDefault();
+            index--;
+            FillLightBox(index)
+          }
+        })
+
+        rightArrow.addEventListener('keydown',(e)=>{
+          if( e.key === 'Enter') {
+            e.preventDefault();
+            index++;
+            FillLightBox(index)
+          }
+        })
+
+            document.addEventListener('keydown',(e)=>{
+              if(e.key === 'ArrowLeft'){
+                if(index === 0) return;
+                e.preventDefault();
+                index--;
+                FillLightBox(index)
+              }
+
+              if(e.key === 'ArrowRight') {
+                if(index === (media.length-1)) return;
+                e.preventDefault();
+                index++;
+                FillLightBox(index)
+              }
+            })
+
+      }
 
     }
   })
@@ -133,72 +207,27 @@ async function fillLightBox() {
         setAriaHidden(lightbox, false);
       }
 
-      //
-      // const exit = target.firstElementChild;
-      //
-      //
-      // const g = lightbox.children;
-      //
-      // target.classList.add('active');
-      //
-      //
-      // t();
-      // function t(){
-      //   for (let i = 0; i < g.length; i++) {
-      //   //indexOf
-      //
-      //     const leftArrow = g[i].children[1].children[0];
-      //     const rightArrow = g[i].children[1].children[2];
-      //     const exit = g[i].firstElementChild;
-      //
 
-      //
-      //     exit.onkeydown = function (e) {
-      //       e.preventDefault()
-      //       if(e.key === "Enter") closeLightBox(g[i]);
-      //     }
-      //
+      exit.onkeydown = function (e) {
+        e.preventDefault()
+        if(e.key === "Enter") closeLightBox();
+      }
 
-      //     // leftArrow.onkeydown = function (e) {
-      //     //   e.preventDefault()
-      //     //   if(e.key === "Enter") left(i,g[i],g.length);
-      //     // }
-      //     //
-      //     // rightArrow.onkeydown = function (e) {
-      //     //   e.preventDefault()
-      //     //   if(e.key === "Enter") right(i,g[i],g.length);
-      //     // }
-      //
-      //
-      //
-      //       leftArrow.addEventListener('click',(e)=>{
-      //         e.preventDefault();
-      //         g[i].classList.remove('active')
-      //         i--;
-      //         g[i].classList.add('active');
-      //         if(g[i]<=0) i=1;
-      //       })
-      //
-      //       rightArrow.addEventListener('click',(e)=>{
-      //         e.preventDefault();
-      //         g[i].classList.remove('active')
-      //         i++;
-      //         g[i].classList.add('active');
-      //         if(g[i]>= g.length) i=1;
-      //       })
-      //
-      //   }
-      //
-      //
-      // }
-      // //
-      //
-      // setAriaHidden(document.querySelector('main'),false);
-      // setAriaHidden(lightbox,true);
-      //
+      document.onkeydown = function (e) {
+
+        if(e.key === "Escape" &&
+            document.querySelector('#lightBox').classList.contains('active')) {
+          e.preventDefault()
+          closeLightBox();
+        }
+      }
+
+
       function open() {
         lightbox.classList.add('active');
-        lightbox.focus();
+        lightbox.firstElementChild.focus();
+        setAriaHidden(document.querySelector('main'),false);
+        setAriaHidden(lightbox,true);
       }
 
 
@@ -216,7 +245,8 @@ function setAriaHidden(element,boolean){
 
 
 
-fillSubBar();
-init();
-fillLightBox();
+fillSubBar()
+init()
+
+
 
