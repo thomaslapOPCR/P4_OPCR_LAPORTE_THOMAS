@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
     <link href="css/photographer.css" rel="stylesheet" type="text/css" />
 	  <link href="css/style.css" rel="stylesheet" type="text/css" />
@@ -12,18 +12,13 @@
   </head>
   <body>
     <header>
-	    <a href="index.html" aria-label="lien vers la page d'accueil"><img src="assets/images/logo.png" class="logo" alt="Fisheye Home page"/></a>
+	    <a href="index.html" tabindex="1" aria-label="lien vers la page d'accueil"><img src="assets/images/logo.png" class="logo" alt="Fisheye Home page"/></a>
     </header>
-    <main id="main" aria-hidden="true">
+    <main id="main" aria-hidden="true" tabindex="-1">
       <section class="photograph-header"></section>
 <!-- 	    select liste pour le tri -->
 	  <section class="sort">
-		    <p>Trier par</p>
-<!-- 		    <select id="selectlist"> -->
-<!-- 			    <option value="Popularité">Popularité</option> -->
-<!-- 			    <option value="Date">Date</option> -->
-<!-- 			    <option value="Titre">Titre</option> -->
-<!-- 		    </select> -->
+		  <p>Trier par</p>
 		  <section class="" id="selectlist" tabindex="0" role="button" aria-label="Navigation to Tabulation">
 			  <p class="Selected"><span id="selected">Popularité</span> <i id="cursor" class="fas fa-angle-down"></i></p>
 			  <p class="border" >Popularité</p>

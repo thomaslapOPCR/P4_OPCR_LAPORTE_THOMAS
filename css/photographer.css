@@ -343,13 +343,13 @@ form div[data-valid-visible="true"] .text-control {
 }
 .formData[data-error]::after {
     content: attr(data-error);
-    font-size: 1.5em;
+    font-size: 1.3em;
     color: #ff001d;
     display: block;
     margin-top: 7px;
     margin-bottom: 7px;
     text-align: left;
-    line-height: 0.3;
+    line-height: 18px;
     opacity: 0;
     transition: 0.3s;
 }

@@ -37,6 +37,16 @@ function closeModal() {
     setAriaHidden(modal,false);
   }
 
+  this.onkeydown = function (event) {
+    if(modal.style.display === 'block'){
+      if (event.key === "Escape") {
+        event.preventDefault();
+        close();
+      }
+    }
+
+  }
+
   exit.onclick = function () {
     close();
   }
@@ -48,12 +58,6 @@ function closeModal() {
     }
   }
 
-    document.onkeydown = function (event) {
-      if (event.key === "Escape") {
-        event.preventDefault();
-        close();
-      }
-    }
 }
 
 function submitForm(){
@@ -84,7 +88,6 @@ function submitForm(){
     asginErrorOrValidity(email.parentElement, false, '', false, false);
     asginErrorOrValidity(message.parentElement, false, '', false, false);
   }else {
-    console.log('erreur')
     return false
   }
 }
@@ -141,12 +144,7 @@ function InputValidate(elements, regex, message) {
 function validate() {
   const submit = document.querySelector('#submit');
   const form = document.querySelector('#form')
-  submit.onkeydown = function (e) {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      submitForm();
-    }
-  }
+
   form.onsubmit = function (e) {
     e.preventDefault();
     submitForm();

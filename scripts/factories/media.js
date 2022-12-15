@@ -7,12 +7,12 @@ function photographerMediaFactory(data) {
 
     function getUserCardDOM() {
         const photographerHeader = `
-         <section class="text-content">
+         <section class="text-content" tabindex="0">
              <h1>${name}</h1>
              <h2>${city} , ${country}</h2>
              <p> ${tagline}</p>
         </section>
-        <button class="contact_button" onclick="displayModal()" aria-label="Contact Me ${name}">Contactez-moi</button>
+        <button class="contact_button" alt="Boutton de contact ${name}" onclick="displayModal()" aria-label="Contact Me ${name}">Contactez-moi</button>
         <section class="image">
             <img src="../../assets/photographers/${portrait}" alt="${name}">
         </section> `;
@@ -23,30 +23,32 @@ function photographerMediaFactory(data) {
 
 // eslint-disable-next-line
 function MediaFactory(data,index) {
+
     const {
         date, id, photographerId, image, video, likes, title, price,
     } = data;
+    const Invalid = `<img className="media img" src="assets/images/InvalidImage.png" aria-label="Image invalide ${title}">`
 
 
-    const picture = `assets/photos/${photographerId}/${image}`;
-    const videoSrc = `assets/photos/${photographerId}/${video}`;
+
+
+    let picture = `assets/photos/${photographerId}/${image}`;
+    let videoSrc = `assets/photos/${photographerId}/${video}`;
     let mediaSupport;
 
-    // console.log(title,image)
-    // if(video === undefined || image === undefined ){
-    //     console.log('test')
-    //     mediaSupport = `<img src="asset/images/InvalidImage.png" alt="Image invalide ${title}">`;
-    // }
-    //
     if (data.video !== undefined) {
         datatype = 'video';
         mediaSupport = `<video id="M${id}" class="media ${datatype}" src="${videoSrc}" type="video" aria-label="video ${title}"></video>`;
+    }
 
-    } else if (data.image !== undefined) {
+
+    if (data.image !== undefined) {
         datatype = 'img'
         mediaSupport = `<img id="M${id}" class="media ${datatype}" src="${picture}" alt="${title}">`;
-
     }
+
+
+
 
 
     function getMediaCardDOM() {
@@ -59,7 +61,7 @@ function MediaFactory(data,index) {
         Media.setAttribute('tabindex', '0');
         //href="javascript:fillLightBox()"
         Media.innerHTML = `
-                <a href="javascript:void(0)" class="lightboxSection" role="button" aria-label="${title + "closeup view"}">
+                <a href="javascript:void(0)" class="lightboxSection" role="button" aria-label="${title + "closeup view"}" tabindex="-1">
                     ${mediaSupport}
                 </a>
                 <div class="titleAndLikes" onclick="likes(this)" onkeydown="this.onkeydown =  (e) => {if(e.key ==='Enter') likes(this)}">
@@ -77,5 +79,7 @@ function MediaFactory(data,index) {
 
     return { getMediaCardDOM , getMediaLightBoxCardDOM};
 }
+
+
 
 

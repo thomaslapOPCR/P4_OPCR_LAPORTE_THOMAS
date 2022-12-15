@@ -43,10 +43,6 @@ async function displayData(photographers, media) {
     mediaSection.appendChild(mediaModel.getMediaCardDOM());
   });
 
-  // lightbox.forEach((lightbox) => {
-  //   const lightboxModel = MediaFactory(lightbox);
-  //   lightBoxSection.appendChild(lightboxModel.getMediaLightBoxCardDOM())
-  // });
 }
 
 async function init() {
@@ -114,9 +110,23 @@ async function fillLightBox(data) {
   const rightArrow =document.querySelector('#right');
   const mediaTitle = document.querySelector('#LightBoxTitle');
 
-  mediaSection.addEventListener('click',async (e) => {
+  mediaSection.addEventListener('keydown',(e)=>{
     if (e.target.parentElement.classList.contains('lightboxSection')) {
+      if(e.key === 'Enter'){
+        e.preventDefault();
+        FillSection(e)
+      }
+    }
+  })
 
+  mediaSection.addEventListener('click',async (e) => {
+    if(e.target.parentElement === null) return;
+
+    if (e.target.parentElement.classList.contains('lightboxSection')) FillSection(e);
+
+  })
+
+    function FillSection(e){
       open();
       let index = parseInt(e.target.parentElement.parentElement.getAttribute('data-index'));
 
@@ -177,26 +187,24 @@ async function fillLightBox(data) {
           }
         })
 
-            document.addEventListener('keydown',(e)=>{
-              if(e.key === 'ArrowLeft'){
-                if(index === 0) return;
-                e.preventDefault();
-                index--;
-                FillLightBox(index)
-              }
+        document.addEventListener('keydown',(e)=>{
+          if(e.key === 'ArrowLeft'){
+            if(index === 0) return;
+            e.preventDefault();
+            index--;
+            FillLightBox(index)
+          }
 
-              if(e.key === 'ArrowRight') {
-                if(index === (media.length-1)) return;
-                e.preventDefault();
-                index++;
-                FillLightBox(index)
-              }
-            })
-
+          if(e.key === 'ArrowRight') {
+            if(index === (media.length-1)) return;
+            e.preventDefault();
+            index++;
+            FillLightBox(index)
+          }
+        })
       }
-
     }
-  })
+
       exit.onclick = function (e) {
         e.preventDefault()
         closeLightBox();
@@ -242,7 +250,6 @@ async function fillLightBox(data) {
 function setAriaHidden(element,boolean){
   return element.setAttribute('aria-hidden',boolean);
 }
-
 
 
 fillSubBar()
