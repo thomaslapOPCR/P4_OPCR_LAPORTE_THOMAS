@@ -499,4 +499,12 @@ form input, form textarea {
         width: 70%;
         height: auto;
     }
+
+    #lightBox .lightbox div #MediaLightbox img,
+    #lightBox .lightbox div #MediaLightbox video
+    {
+        display: block;
+        height: 80%;
+        width: 80%;
+    }
 }

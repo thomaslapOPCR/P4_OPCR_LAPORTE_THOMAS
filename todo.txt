@@ -1,8 +1,4 @@
-.Soutenance Blanche la semaine prochaine.
-.responsive page principale.
-.verifier la select box pour fonctionner avec les fleches
-.lightbox responsive
-.lightbox
+
 
 
 •	Vérifier si le site n'a pas de problèmes d’accessibilité  avec

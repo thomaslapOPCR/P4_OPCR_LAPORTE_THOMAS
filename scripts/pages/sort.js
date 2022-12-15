@@ -10,11 +10,13 @@ function OpenFilters() {
         selector.classList.toggle('active');
         cursor.classList.toggle('rotate');
         if(selector.getAttribute('class') !== 'active'){
+            document.querySelector('body').style.overflowY = 'scroll';
             selector.children[1].setAttribute('tabindex', '');
             selector.children[2].setAttribute('tabindex', '');
             selector.children[3].setAttribute('tabindex', '');
         }
         if(selector.getAttribute('class') === 'active'){
+            document.querySelector('body').style.overflowY = 'hidden';
             selector.children[1].focus();
             selector.children[1].setAttribute('tabindex', '0');
             selector.children[2].setAttribute('tabindex', '0');
@@ -45,7 +47,18 @@ function OpenFilters() {
                 break;
             }
             case "ArrowDown" : {
+                selector.children[1].focus();
+               if(e.target.textContent === 'Popularité') selector.children[2].focus();
+                   if(e.target.textContent === 'Date')  selector.children[3].focus();
+                       if(e.target.textContent === 'Titre')selector.children[1].focus();
 
+                break;
+            }
+
+            case "ArrowUp" : {
+                if(e.target.textContent === 'Popularité') selector.children[3].focus();
+                if(e.target.textContent === 'Date')  selector.children[1].focus();
+                if(e.target.textContent === 'Titre')selector.children[2].focus();
                 break;
             }
 

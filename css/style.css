@@ -92,3 +92,22 @@ h1 {
     font-weight: normal;
     padding-top: 10px;
 }
+
+
+@media screen and (max-width: 1000px ) {
+
+    .photographer_section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 70px;
+        margin-top: 100px;
+        padding: 30px ;
+        min-width: 10%;
+    }
+
+    .photographer_section article a h2 {
+        color: #D3573C;
+        font-size: 30px;
+        text-align: center;
+    }
+}
