@@ -11,6 +11,15 @@
         "ecmaVersion": "latest"
     },
     "rules": {
+        "no-unused-vars": "off",
+        "no-use-before-define" : "off",
+        "radix": "off",
+        "no-undef":"off",
+        "no-param-reassign":"off",
+        "indent": "off",
+        "no-return-assign":"off",
+        "no-shadow": "off",
+        "no-plusplus": "off",
         "eqeqeq": ["warn","always"]
     }
 

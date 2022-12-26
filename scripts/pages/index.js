@@ -6,7 +6,6 @@ async function fetchData() {
     return e;
   }
 }
-// eslint-disable-next-line
 async function displayData(photographers) {
   const photographersSection = document.querySelector('.photographer_section');
 

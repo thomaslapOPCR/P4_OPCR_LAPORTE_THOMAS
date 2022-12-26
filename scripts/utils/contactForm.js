@@ -6,22 +6,20 @@ async function fillName() {
   });
 }
 
-// eslint-disable-next-line
 function displayModal() {
   const modal = document.getElementById('contact_modal');
   fillName();
-  setAriaHidden(document.querySelector('main'),false);
-  setAriaHidden(modal,true);
+  setAriaHidden(document.querySelector('main'), true);
+  setAriaHidden(modal, false);
   modal.style.display = 'block';
-  document.querySelector('#firstname').focus()
+  document.querySelector('#firstname').focus();
   document.querySelector('body').style.overflowY = 'hidden';
 }
-// eslint-disable-next-line
+
 function closeModal() {
   const modal = document.getElementById('contact_modal');
   const exit = document.querySelector('#exit-modal');
-  const form = document.querySelector('#form')
-
+  const form = document.querySelector('#form');
 
   const firstname = document.querySelector('#firstname');
   const lastname = document.querySelector('#lastname');
@@ -30,56 +28,54 @@ function closeModal() {
 
   function close() {
     modal.style.display = 'none';
-    resetForm([firstname,lastname,email,message])
+    resetForm([firstname, lastname, email, message]);
     form.reset();
     document.querySelector('body').style.overflowY = 'scroll';
-    setAriaHidden(document.querySelector('main'),true);
-    setAriaHidden(modal,false);
+    setAriaHidden(document.querySelector('main'), false);
+    setAriaHidden(modal, true);
   }
 
-  this.onkeydown = function (event) {
-    if(modal.style.display === 'block'){
-      if (event.key === "Escape") {
+  this.onkeydown = (event) => {
+    if (modal.style.display === 'block') {
+      if (event.key === 'Escape') {
         event.preventDefault();
         close();
       }
     }
+  };
 
-  }
-
-  exit.onclick = function () {
+  exit.onclick = () => {
     close();
-  }
+  };
 
-  exit.onkeydown = function (event) {
-    if (event.key === "Enter") {
+  exit.onkeydown = (event) => {
+    if (event.key === 'Enter') {
       event.preventDefault();
       close();
     }
-  }
-
+  };
 }
 
-function submitForm(){
-  const form = document.querySelector('#form')
+function submitForm() {
+  const form = document.querySelector('#form');
   const firstname = document.querySelector('#firstname');
   const lastname = document.querySelector('#lastname');
   const email = document.querySelector('#email');
   const message = document.querySelector('#message');
+  // eslint-disable-next-line
   const regEmail = new RegExp(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/);
-  const regGen = new RegExp('^[a-zA-Z-]{10,2000}(\\s[a-zA-Z]{1,})*$')
+  // eslint-disable-next-line
+  const regGen = new RegExp('^[a-zA-Z-]{5,2000}(\\s[a-zA-Z]{1,})*$');
 
-  change(firstname,regGen,'Veuillez entrer 5 caractères ou plus pour le champ du prénom');
-  change(lastname,regGen,'Veuillez entrer 5 caractères ou plus pour le champ du nom');
-  change(email,regEmail,'Veuillez entrer un email valide pour ce champ.');
-  change(message,undefined,'');
+  change(firstname, regGen, 'Veuillez entrer 5 caractères ou plus pour le champ du prénom');
+  change(lastname, regGen, 'Veuillez entrer 5 caractères ou plus pour le champ du nom');
+  change(email, regEmail, 'Veuillez entrer un email valide pour ce champ.');
+  change(message, undefined, '');
 
-  if(checkValidity(firstname.parentElement) === "true" &&
-      checkValidity(lastname.parentElement) === "true"  &&
-      checkValidity(email.parentElement) === "true"  &&
-      checkValidity(message.parentElement) === "true")
-  {
-    console.log('Valide')
+  if (checkValidity(firstname.parentElement) === 'true'
+      && checkValidity(lastname.parentElement) === 'true'
+      && checkValidity(email.parentElement) === 'true'
+      && checkValidity(message.parentElement) === 'true') {
     form.reset();
     const modal = document.getElementById('contact_modal');
     modal.style.display = 'none';
@@ -87,17 +83,15 @@ function submitForm(){
     asginErrorOrValidity(lastname.parentElement, false, '', false, false);
     asginErrorOrValidity(email.parentElement, false, '', false, false);
     asginErrorOrValidity(message.parentElement, false, '', false, false);
-  }else {
-    return false
   }
 }
 
-function change(elements,regex,msg){
-  const form = document.querySelector('#form')
+function change(elements, regex, msg) {
+  const form = document.querySelector('#form');
 
-  function MessageVerify(){
-    if(elements.id ==='message') {
-      if(elements.value.trim().length <10){
+  function MessageVerify() {
+    if (elements.id === 'message') {
+      if (elements.value.trim().length < 10) {
         asginErrorOrValidity(elements.parentElement, false, 'Vous devez avoir 10 caractères minimum ', true, false);
       } else {
         asginErrorOrValidity(elements.parentElement, true, '', false, true);
@@ -109,18 +103,17 @@ function change(elements,regex,msg){
     MessageVerify();
     InputValidate(elements, regex, msg);
   };
-  form.addEventListener('submit', (e)=>{
+  form.addEventListener('submit', (e) => {
     e.preventDefault();
     MessageVerify();
     InputValidate(elements, regex, msg);
-  })
-
+  });
 }
 
 function checkValidity(elements) {
   return elements.getAttribute('data-valid');
 }
-
+// eslint-disable-next-line
 function asginErrorOrValidity(Elements, dataValid, message, errVisible, validVisible) {
   Elements.setAttribute('data-error-visible', errVisible);
   Elements.setAttribute('data-valid-visible', validVisible);
@@ -129,8 +122,10 @@ function asginErrorOrValidity(Elements, dataValid, message, errVisible, validVis
 }
 
 function InputValidate(elements, regex, message) {
+  // eslint-disable-next-line
   if (regex === null) return;
-  if (regex === undefined) return 'le test ne doit pas être effectuer'
+  // eslint-disable-next-line
+  if (regex === undefined) return 'le test ne doit pas être effectuer';
   const checkValidValue = regex.test(elements.value);
 
   if (checkValidValue) {
@@ -140,21 +135,20 @@ function InputValidate(elements, regex, message) {
   }
 }
 
-
 function validate() {
   const submit = document.querySelector('#submit');
-  const form = document.querySelector('#form')
+  const form = document.querySelector('#form');
 
-  form.onsubmit = function (e) {
+  form.onsubmit = (e) => {
     e.preventDefault();
     submitForm();
-  }
+  };
 }
 
 function resetForm(Elements) {
-  for(let i of Elements) asginErrorOrValidity(i.parentElement, true, '', false, false);
+  // eslint-disable-next-line
+  for (const i of Elements) asginErrorOrValidity(i.parentElement, true, '', false, false);
 }
-
 
 submitForm();
 validate();

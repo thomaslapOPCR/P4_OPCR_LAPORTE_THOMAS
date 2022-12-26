@@ -12,18 +12,19 @@
   </head>
   <body>
     <header>
-	    <a href="index.html" tabindex="1" aria-label="lien vers la page d'accueil"><img src="assets/images/logo.png" class="logo" alt="Fisheye Home page"/></a>
+	    <a href="index.html" tabindex="0" aria-label="lien vers la page d'accueil"><img src="assets/images/logo.png" class="logo" alt="Fisheye Home page"/></a>
     </header>
-    <main id="main" aria-hidden="true" tabindex="-1">
+    
+    <main id="main" aria-hidden="false">
       <section class="photograph-header"></section>
 <!-- 	    select liste pour le tri -->
 	  <section class="sort">
 		  <p>Trier par</p>
-		  <section class="" id="selectlist" tabindex="0" role="button" aria-label="Navigation to Tabulation">
+		  <section class="" id="selectlist" tabindex="0" role="button" aria-label="Navigation to Tabulation" role="listbox">
 			  <p class="Selected"><span id="selected">Popularité</span> <i id="cursor" class="fas fa-angle-down"></i></p>
-			  <p class="border" >Popularité</p>
-			  <p class="border" >Date</p>
-			  <p class="border" >Titre</p>
+			  <p class="border" aria-label="selecteur: Popularité">Popularité</p>
+			  <p class="border" aria-label="selecteur: Date"  >Date</p>
+			  <p class="border" aria-label=" selecteur: Titre">Titre</p>
 		  </section>
 	  </section>
 <!-- 	  Zone des media -->
@@ -32,51 +33,51 @@
 	  <section id="subMenu">
 		  <article class="likes">
 			  <p id="numberLikes"></p>
-			  <i class="fas fa-heart"></i>
+			  <em class="fas fa-heart"></em>
 		  </article>
 		  <article class="price">
 			  <p id="price"> / jour</p>
 		  </article>
 	  </section>
     </main>
-    <div id="contact_modal" aria-hidden="false" role=”dialog” aria-describedby="aria-desc" aria-modal="true" aria-label="closeup view">
+    <div id="contact_modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="closeup view">
 			<div class="modal">
 				<div class="header">
 					<div class="text-header" id="aria-desc">
 						<h2>Contactez-moi</h2>
 						<h2 id="Photographer-name"></h2>
 					</div>
-		          <img src="assets/icons/close.svg" id="exit-modal" role="button" tabindex="0"/>
+		          <img src="assets/icons/close.svg" id="exit-modal" role="button" tabindex="0" alt="fermeture de la modal contact"/>
                 </div>
 				
 				<form id="form"
 				      action="photographer.html"
 				      method="get">
 					<div class="formData">
-						<label for="firstname">Prénom</label>
-						<input class="text-control" type="text" id="firstname" aria-required="true"/>
+						<label for="firstname" id="label-firstname">Prénom</label>
+						<input class="text-control" type="text" id="firstname" aria-required="true" />
 					</div>
 					
 					<div class="formData">
-						<label for="lastname">Nom</label>
+						<label for="lastname" id="label-lastname">Nom</label>
 						<input  class="text-control"  type="text" id="lastname"  aria-required="true"/>
 					</div>
 					
 					<div class="formData">
 						<label for="email">Email</label>
-						<input  class="text-control"  type="email" id="email"  aria-required="true"/>
+						<input  class="text-control"  type="email" id="email"  aria-required="true" />
 					</div>
 					
 					<div class="formData">
 						<label for="message">Votre message</label>
-						<textarea  class="text-control"  id="message"  aria-required="true"></textarea>
+						<textarea  class="text-control"  id="message"  aria-required="true" ></textarea>
 					</div>
 					<input type="submit" class="contact_button" id="submit" value="Envoyer">
 				</form>
 			</div>
 	</div>
    
-   <section id="lightBox" aria-hidden="false" role="dialog">
+   <section id="lightBox" aria-hidden="true" role="dialog" aria-label="Open lightBox">
 	   <div class="lightbox">
 		   <i role="button" id="exit-lightbox" tabindex="0" class="fal fa-times"></i>
 		   <div>
