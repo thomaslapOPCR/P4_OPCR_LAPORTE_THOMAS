@@ -80,13 +80,13 @@ function likes(el) {
       likeUtils(
         likes - 1,
         totalLikes -= 1,
-        '<em class="fal fa-heart">',
+        '<em class="fal fa-heart" aria-pressed="false">',
       );
     }
 
     if (isLiked === 'false') {
       likesElements.setAttribute('data-isLike', true);
-      likeUtils(likes + 1, totalLikes += 1, '<em class="fas fa-heart">');
+      likeUtils(likes + 1, totalLikes += 1, '<em class="fas fa-heart" aria-pressed="true">');
     }
   }
 
@@ -104,21 +104,19 @@ async function fillLightBox(data) {
 
   mediaSection.addEventListener('keydown', async (e) => {
     if (e.target.parentElement === null) return;
-    if (e.target.classList.contains('lightboxSection')) {
-      if (e.key === 'Enter') FillSection(e, 'enter');
-    }
+    if (e.target.classList.contains('lightboxSection')) if (e.key === 'Enter') FillSection(e, 'enter');
   });
 
   mediaSection.addEventListener('click', async (e) => {
     if (e.target.parentElement === null) return;
-
     if (e.target.parentElement.classList.contains('lightboxSection')) FillSection(e, 'click');
   });
 
   function FillSection(e, type) {
     open();
+
     let index;
-    // console.log(e, type);
+
     if (type === 'enter') {
       index = parseInt(e.target.children[0].parentElement.parentElement.getAttribute('data-index'));
     } else if (type === 'click') {
@@ -142,8 +140,11 @@ async function fillLightBox(data) {
       mediaTitle.innerHTML = media[index].title;
       lightboxSection.innerHTML = '';
       lightboxSection.innerHTML = (mediaModel.getMediaLightBoxCardDOM());
-
-      if (lightboxSection.children[0].getAttribute('type') === 'video') lightboxSection.children[0].setAttribute('controls', '');
+      lightboxSection.focus();
+      if (lightboxSection.children[0].getAttribute('type') === 'video') {
+        lightboxSection.children[0].setAttribute('controls', '');
+        lightboxSection.children[0].setAttribute('tabindex', '0');
+      }
     }
 
     FillLightBox(index);
@@ -201,8 +202,8 @@ async function fillLightBox(data) {
   };
   function closeLightBox() {
     lightbox.classList.remove('active');
-    setAriaHidden(document.querySelector('main'), true);
-    setAriaHidden(lightbox, false);
+    setAriaHidden(document.querySelector('main'), false);
+    setAriaHidden(lightbox, true);
   }
 
   exit.onkeydown = (e) => {
@@ -220,9 +221,8 @@ async function fillLightBox(data) {
 
   function open() {
     lightbox.classList.add('active');
-    lightbox.firstElementChild.focus();
-    setAriaHidden(document.querySelector('main'), false);
-    setAriaHidden(lightbox, true);
+    setAriaHidden(document.querySelector('main'), true);
+    setAriaHidden(lightbox, false);
   }
 }
 

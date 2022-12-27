@@ -20,11 +20,11 @@
 <!-- 	    select liste pour le tri -->
 	  <section class="sort">
 		  <p>Trier par</p>
-		  <section class="" id="selectlist" tabindex="0" role="button" aria-label="Navigation to Tabulation" role="listbox">
-			  <p class="Selected"><span id="selected">Popularité</span> <i id="cursor" class="fas fa-angle-down"></i></p>
-			  <p class="border" aria-label="selecteur: Popularité">Popularité</p>
-			  <p class="border" aria-label="selecteur: Date"  >Date</p>
-			  <p class="border" aria-label=" selecteur: Titre">Titre</p>
+		  <section class="" id="selectlist" tabindex="0" role="button" aria-label="Navigation to Tabulation">
+			  <p class="Selected"><span id="selected">Popularité</span> <em id="cursor" class="fas fa-angle-down"></em></p>
+			  <p class="border" role="button" aria-label="selecteur: Popularité">Popularité</p>
+			  <p class="border" role="button" aria-label="selecteur: Date"  >Date</p>
+			  <p class="border" role="button" aria-label=" selecteur: Titre">Titre</p>
 		  </section>
 	  </section>
 <!-- 	  Zone des media -->
@@ -79,11 +79,11 @@
    
    <section id="lightBox" aria-hidden="true" role="dialog" aria-label="Open lightBox">
 	   <div class="lightbox">
-		   <i role="button" id="exit-lightbox" tabindex="0" class="fal fa-times"></i>
+		   <em role="button" aria-label="close button" id="exit-lightbox" tabindex="0" class="fal fa-times"></em>
 		   <div>
-			   <i role="button" class="fas fa-chevron-left" id="left" tabindex="0"></i>
+			   <em role="button" aria-label="left arrow" class="fas fa-chevron-left" id="left" tabindex="0"></em>
 			   <div id="MediaLightbox" tabindex="0"></div>
-			   <i role="button" class="fas fa-chevron-right" id="right" tabindex="0"></i>
+			   <em role="button" aria-label="right arrow" class="fas fa-chevron-right" id="right" tabindex="0"></em>
 		   </div>
 		   <p class="lightbox-title" id="LightBoxTitle"></p>
 	   </div>

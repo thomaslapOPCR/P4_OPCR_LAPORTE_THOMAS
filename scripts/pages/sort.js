@@ -79,6 +79,7 @@ function selectFilter() {
     }
 
     el.onkeydown = (e) => {
+      console.log('enter');
       if (e.key === 'Enter') asingSort(openSelectMenu());
     };
 

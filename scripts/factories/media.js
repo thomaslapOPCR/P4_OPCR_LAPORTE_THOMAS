@@ -48,11 +48,11 @@ function MediaFactory(data, index) {
     Media.setAttribute('data-index', index);
     Media.setAttribute('class', 'Media-card');
     Media.setAttribute('tabindex', '-1');
-    // href="javascript:fillLightBox()"
+
     Media.innerHTML = `
-                <a href="javascript:void(0)" class="lightboxSection" role="button" aria-label="${`${title}closeup view`}" tabindex="0">
+                <article class="lightboxSection" role="button" aria-label="${`${title}closeup view`}" tabindex="0">
                     ${mediaSupport}
-                </a>
+                </article>
                 <div class="titleAndLikes" onclick="likes(this)" onkeydown="this.onkeydown =  (e) => {if(e.key ==='Enter') likes(this)}">
                     <h3 class="media-title">${title}</h3>
                     <p class="media-likes" aria-label="likes"  tabindex="0" role="button" data-isLike="false">${likes}<em class="fal fa-heart"></em></p>

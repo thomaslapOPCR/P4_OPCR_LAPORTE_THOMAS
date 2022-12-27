@@ -14,9 +14,9 @@ function photographerFactory(data) {
                         <img src="assets/photographers/${portrait}" alt="${name}">
                         <h2>${name}</h2>
                     </a>
-                    <h3>${city} , ${country}</h3>
-                    <p class="tag">${tagline}</p>
-                    <p class="price">${price}€/jour</p>
+                    <h3 tabindex="0">${city} , ${country}</h3>
+                    <p class="tag" tabindex="0" aria-label="${tagline}">${tagline}</p>
+                    <p class="price" tabindex="0" aria-label="${price}€/jour">${price}€/jour</p>
                 `;
     return (article);
   }
