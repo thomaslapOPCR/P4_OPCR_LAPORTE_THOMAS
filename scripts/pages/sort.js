@@ -1,10 +1,15 @@
 OpenFilters();
 selectFilter();
 
+/**
+ * Permet la gestion de la select list faite en JS afin de meieux correspondre a la maquettes
+ * @constructor
+ */
 function OpenFilters() {
   const cursor = document.querySelector('#cursor');
   const selector = document.querySelector('#selectlist');
-
+  //methode qui permet d'ouvrir la selectlist et de faire rotate le chevron active
+  // egalement les Tabindex
   function open() {
     selector.classList.toggle('active');
     cursor.classList.toggle('rotate');
@@ -22,18 +27,18 @@ function OpenFilters() {
       selector.children[3].setAttribute('tabindex', '0');
     }
   }
-
+  //ferme la select list
   function close() {
     if (selector.classList.contains('active') && cursor.classList.contains('rotate')) {
       selector.classList.remove('active');
       cursor.classList.remove('rotate');
     }
   }
-
+  //ouvre la select liste avec le click
   selector.onclick = () => {
     open();
   };
-
+  //permet de geré les interaction clavier
   selector.onkeydown = (e) => {
     switch (e.key) {
       case 'Enter': {
@@ -67,6 +72,8 @@ function OpenFilters() {
     }
   };
 }
+
+//permet d'executé le tie lors d'une interaction avec un element
 function selectFilter() {
   const list = document.querySelectorAll('#selectlist p');
 
@@ -79,7 +86,6 @@ function selectFilter() {
     }
 
     el.onkeydown = (e) => {
-      console.log('enter');
       if (e.key === 'Enter') asingSort(openSelectMenu());
     };
 
@@ -88,17 +94,28 @@ function selectFilter() {
     };
   });
 }
+
+/**
+ * realise le tris en fonction de la date || des la popularité || du titre
+ * @param element
+ * @returns {Promise<*[]>}
+ */
 // eslint-disable-next-line
 async function asingSort(element) {
+  //tableau vide qui reçevera les data
   const data = [];
+  //attribution au tableau data des information reçus depuis la fonction get media
   // eslint-disable-next-line
   for (const i of await getMedia()) data.push(i);
   const mediaSection = document.querySelector('#Media-Content');
-
+  //permet la suppression de l'element selctionner
   async function remove() {
     while (mediaSection.firstChild) mediaSection.removeChild(mediaSection.firstChild);
   }
 
+  /**
+   * Switch qui permet de realsier le trie
+   */
   switch (element) {
     case 'Popularité': {
       await remove();

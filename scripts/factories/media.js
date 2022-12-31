@@ -1,9 +1,16 @@
+/**
+ * factory media qui crée le header de la page photographe
+ * @param data
+ * @returns {{getUserCardDOM: (function(): string)}}
+ */
+
 function photographerMediaFactory(data) {
+  //decomposition des datas
   const {
     name, portrait, id, city, country, tagline, price,
   } = data;
   const picture = `assets/photographers/${portrait}`;
-
+  // methode qui genre le HTML
   function getUserCardDOM() {
     const photographerHeader = `
          <section class="text-content" tabindex="0" aria-label="photographe ${name}">
@@ -21,16 +28,23 @@ function photographerMediaFactory(data) {
   return { getUserCardDOM };
 }
 
+/**
+ * Factory qui permet de crée les media dans la page et le contenue de la lightBox
+ * @param data
+ * @param index
+ * @returns {{getMediaLightBoxCardDOM: (function(): *), getMediaCardDOM: (function(): HTMLElement)}}
+ * @constructor
+ */
 function MediaFactory(data, index) {
   const {
     date, id, photographerId, image, video, likes, title, price,
   } = data;
-  const Invalid = `<img className="media img" src="assets/images/InvalidImage.png" aria-label="Image invalide ${title}">`;
 
+  //variable qui gere le type de de format
   const picture = `assets/photos/${photographerId}/${image}`;
   const videoSrc = `assets/photos/${photographerId}/${video}`;
   let mediaSupport;
-
+  //condition qui attribue la bonne balise HMTL en fonction du type de media
   if (data.video !== undefined) {
     datatype = 'video';
     mediaSupport = `<video id="M${id}" tabindex="-1" class="media ${datatype}" src="${videoSrc}" type="video" aria-label="video ${title}"></video>`;
@@ -40,7 +54,7 @@ function MediaFactory(data, index) {
     datatype = 'img';
     mediaSupport = `<img id="M${id}" class="media ${datatype}" src="${picture}" alt="${title}">`;
   }
-
+  //methode qui genere le HMTL du media
   function getMediaCardDOM() {
     const Media = document.createElement('article');
     Media.setAttribute('id', `A${id}`);
@@ -60,7 +74,7 @@ function MediaFactory(data, index) {
            `;
     return (Media);
   }
-
+  //methode qui genere le media dans la lightbox
   function getMediaLightBoxCardDOM() {
     return (mediaSupport);
   }

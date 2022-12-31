@@ -1,19 +1,17 @@
 List Todos
-    o	Tri
-        •	Selectbox pouvoir utiliser les flèches pour se déplacer  | ✅
-        •	Faire le responsive pour la version tablette  | ✅
-    o	page d'accueil
-        	aligner les pastilles des photographes  | ✅
-    o	 lightbox
-        •	Vérifier si le site n'a pas de problèmes d’accessibilité  avec Achecker Wave et Une liseuse
-    o	 global
-        •	Vérifier le code avec Eslint
-        •	Se préparer à la soutenance blanche
+font i ver EM
+
+test du site avec liseuse
+Verifier les logs
+
 
 
 \\\\\\\\\\\\\\\\ QUESTION \\\\\\\\\\\\\\\\\\\\\\
 
--------------------------------
+
+
+
+------------------------------
  | ✅ Fait                   |
  | ❌ Erreur                 |
  | ⚠ Question                |

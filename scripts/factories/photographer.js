@@ -1,3 +1,4 @@
+//factory qui gere le contenue dans la page index.html
 function photographerFactory(data) {
   const {
     name, portrait, id, city, country, tagline, price,
