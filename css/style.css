@@ -24,7 +24,7 @@ header {
     height: 90px;
 }
 
-h1 {
+header h1 {
     color: #901C1C;
     margin-right: 100px;
 }
@@ -32,7 +32,6 @@ h1 {
 .logo {
     height: 50px;
     margin: 43px 0px 43px 100px;
-
 }
 
 .photographer_section {
@@ -95,10 +94,26 @@ h1 {
 
 
 @media screen and (max-width: 1000px ) {
-
+    header {
+        display: flex;
+        flex-direction: column;
+        margin: 20px 0;
+        gap: 30px;
+    }
+    header h1 {
+        width: 100%;
+        text-align: center;
+        margin-right: 0;
+    }
+    header .logo {
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
     .photographer_section {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
         gap: 70px;
         margin-top: 100px;
         padding: 30px ;

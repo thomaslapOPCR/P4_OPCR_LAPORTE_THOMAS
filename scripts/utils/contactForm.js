@@ -81,6 +81,14 @@ function submitForm() {
       && checkValidity(lastname.parentElement) === 'true'
       && checkValidity(email.parentElement) === 'true'
       && checkValidity(message.parentElement) === 'true') {
+    const dataContact = {
+      firstname : firstname.value,
+      lastname : lastname.value,
+      email : email.value,
+      message : message.value,
+    }
+    console.log(dataContact);
+
     form.reset();
     const modal = document.getElementById('contact_modal');
     //ferme la modal et reset les champs
@@ -89,6 +97,8 @@ function submitForm() {
     asginErrorOrValidity(lastname.parentElement, false, '', false, false);
     asginErrorOrValidity(email.parentElement, false, '', false, false);
     asginErrorOrValidity(message.parentElement, false, '', false, false);
+
+
   }
 }
 //permet la verifaction des champs en fonction des event input et change

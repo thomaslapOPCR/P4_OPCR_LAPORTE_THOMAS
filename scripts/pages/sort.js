@@ -133,11 +133,13 @@ async function asingSort(element) {
     }
 
     case 'Titre': {
+      //modifier avec methode localCompare a.localeCompare() afin d'optmiser le code
       await remove();
       const media = data.sort((a, b) => {
         if (b.title > a.title) {
           return -1;
         }
+
         if (a.title > b.title) {
           return 1;
         }

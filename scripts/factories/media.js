@@ -14,7 +14,7 @@ function photographerMediaFactory(data) {
   function getUserCardDOM() {
     const photographerHeader = `
          <section class="text-content" tabindex="0" aria-label="photographe ${name}">
-             <h1>${name}</h1>
+             <h1 class="header-title">${name}</h1>
              <h2>${city} , ${country}</h2>
              <p> ${tagline}</p>
         </section>
